@@ -15,9 +15,12 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         //this conects java class and the layout file
         setContentView(R.layout.activity_main);
-        Button btnSignUp =(Button)findViewById(R.id.btnSignUp);
-        Button btnCancel = (Button)findViewById(R.id.btnCancel);
 
+        //type casting to buttons for Actionlisteners
+        Button btnSignUp =(Button)findViewById(R.id.btnSignUp);
+       Button btnCancel = (Button)findViewById(R.id.btnCancel);
+
+        //this also works like a charm
         btnSignUp.setOnClickListener(new View.OnClickListener()
         {
             public void onClick (View v)
@@ -28,6 +31,7 @@ public class MainActivity extends AppCompatActivity
 
 
         });
+        //this definitely works 100% correct
         btnCancel.setOnClickListener(new View.OnClickListener()
         {
             @Override
