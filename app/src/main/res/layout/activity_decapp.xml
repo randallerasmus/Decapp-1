@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Decapp"
+            android:id="@+id/textView13"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="38dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Snap Face"
+            android:id="@+id/button6"
+            android:layout_marginTop="55dp"
+            android:layout_below="@+id/textView13"
+            android:layout_alignRight="@+id/button10"
+            android:layout_alignEnd="@+id/button10" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Display Suspects"
+            android:id="@+id/button7"
+            android:layout_alignTop="@+id/button6"
+            android:layout_toRightOf="@+id/button6"
+            android:layout_toEndOf="@+id/button6"
+            android:layout_marginLeft="36dp"
+            android:layout_marginStart="36dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Search Suspects"
+            android:id="@+id/button8"
+            android:layout_below="@+id/button6"
+            android:layout_toRightOf="@+id/button11"
+            android:layout_toEndOf="@+id/button11" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Remove Suspects"
+            android:id="@+id/button9"
+            android:layout_below="@+id/button8"
+            android:layout_alignLeft="@+id/button7"
+            android:layout_alignStart="@+id/button7" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit Suspects"
+            android:id="@+id/button10"
+            android:layout_below="@+id/button8"
+            android:layout_toLeftOf="@+id/textView13"
+            android:layout_toStartOf="@+id/textView13" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Wanteds"
+            android:id="@+id/button11"
+            android:layout_below="@+id/button10"
+            android:layout_alignLeft="@+id/button10"
+            android:layout_alignStart="@+id/button10" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Danger Zone"
+            android:id="@+id/button12"
+            android:layout_below="@+id/button9"
+            android:layout_alignRight="@+id/button8"
+            android:layout_alignEnd="@+id/button8" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Law Update"
+            android:id="@+id/button13"
+            android:layout_below="@+id/button11"
+            android:layout_toRightOf="@+id/button11"
+            android:layout_toEndOf="@+id/button11"
+            android:layout_marginTop="23dp" />
+    </RelativeLayout>
+</LinearLayout>

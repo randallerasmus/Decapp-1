@@ -1,5 +1,17 @@
 package za.ac.cput.decapp.Repositories.Impl;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
+import java.sql.SQLException;
+import java.util.HashSet;
+import java.util.Set;
+
+import za.ac.cput.decapp.Conf.databases.DBConstants;
+import za.ac.cput.decapp.Domain.User;
+
 /**
  * Created by User on 2016/05/04.
  */
@@ -9,22 +21,20 @@ public class UserRepositoryImpl {
 
     public static final String COLUMN_ID = "id";
     public static final String COLUMN_UserID = "UserId";
-    public static final String COLUMN_FIRSTNAME = "firstname";
-    public static final String COLUMN_LASTNAME = "lastName";
-    public static final String COLUMN_UserIMAGE = "UserImage";
-    public static final String COLUMN_SYMBOLIMAGE = "symbolImage";
-    public static final String COLUMN_ELECTIONTYPEID = "electionTypeId";
+    public static final String COLUMN_screenName = "screenName";
+    public static final String COLUMN_email = "email";
+    public static final String COLUMN_password = "password";
+    public static final String COLUMN_obNumber = "obNumber";
 
     // Database creation sql statement
     private static final String DATABASE_CREATE = " CREATE TABLE "
             + TABLE_NAME + "("
             + COLUMN_ID + " INTEGER  PRIMARY KEY AUTOINCREMENT, "
             + COLUMN_UserID + " TEXT UNIQUE NOT NULL , "
-            + COLUMN_FIRSTNAME + " TEXT NOT NULL , "
-            + COLUMN_LASTNAME + " TEXT NOT NULL , "
-            + COLUMN_UserIMAGE + " BLOB , "
-            + COLUMN_SYMBOLIMAGE + " BLOB , "
-            + COLUMN_ELECTIONTYPEID + " TEXT NOT NULL );";
+            + COLUMN_screenName + " TEXT NOT NULL , "
+            + COLUMN_email + " TEXT NOT NULL , "
+            + COLUMN_password + " TEXT NOT NULL, "
+            + COLUMN_obNumber + " TEXT NOT NULL );";
 
 
     public UserRepositoryImpl(Context context) {
@@ -48,11 +58,10 @@ public class UserRepositoryImpl {
                 new String[]{
                         COLUMN_ID,
                         COLUMN_UserID,
-                        COLUMN_FIRSTNAME,
-                        COLUMN_LASTNAME,
-                        COLUMN_UserIMAGE,
-                        COLUMN_SYMBOLIMAGE,
-                        COLUMN_ELECTIONTYPEID},
+                        COLUMN_screenName,
+                        COLUMN_email,
+                        COLUMN_password,
+                        COLUMN_obNumber},
                 COLUMN_ID + " =? ",
                 new String[]{String.valueOf(id)},
                 null,
@@ -62,12 +71,11 @@ public class UserRepositoryImpl {
         if (cursor.moveToFirst()) {
             final User User = new User.Builder()
                     .id(cursor.getLong(cursor.getColumnIndex(COLUMN_ID)))
-                    .symbolImage(cursor.getBlob(cursor.getColumnIndex(COLUMN_SYMBOLIMAGE)))
-                    .firstname(cursor.getString(cursor.getColumnIndex(COLUMN_FIRSTNAME)))
-                    .lastName(cursor.getString(cursor.getColumnIndex(COLUMN_LASTNAME)))
-                    .UserImage(cursor.getBlob(cursor.getColumnIndex(COLUMN_UserIMAGE)))
+                    .screenName(cursor.getString(cursor.getColumnIndex(COLUMN_screenName)))
+                    .email(cursor.getString(cursor.getColumnIndex(COLUMN_email)))
+                    .password(cursor.getString(cursor.getColumnIndex(COLUMN_password)))
                     .UserId(cursor.getString(cursor.getColumnIndex(COLUMN_UserID)))
-                    .electionTypeId(cursor.getString(cursor.getColumnIndex(COLUMN_ELECTIONTYPEID)))
+                    .obNumber(cursor.getString(cursor.getColumnIndex(COLUMN_obNumber)))
                     .build();
 
             return User;
@@ -82,11 +90,10 @@ public class UserRepositoryImpl {
         ContentValues values = new ContentValues();
         values.put(COLUMN_ID, entity.getId());
         values.put(COLUMN_UserID, entity.getUserId());
-        values.put(COLUMN_FIRSTNAME, entity.getFirstname());
-        values.put(COLUMN_LASTNAME, entity.getLastName());
-        values.put(COLUMN_UserIMAGE, entity.getUserImage());
-        values.put(COLUMN_SYMBOLIMAGE, entity.getSymbolImage());
-        values.put(COLUMN_ELECTIONTYPEID, entity.getElectionTypeId());
+        values.put(COLUMN_screenName, entity.getscreenName());
+        values.put(COLUMN_email, entity.getemail());
+        values.put(COLUMN_password, entity.getString());
+       values.put(COLUMN_obNumber, entity.getobNumber());
         long id = db.insertOrThrow(TABLE_NAME, null, values);
         User insertedEntity = new User.Builder()
                 .copy(entity)
@@ -101,11 +108,10 @@ public class UserRepositoryImpl {
         ContentValues values = new ContentValues();
         values.put(COLUMN_ID, entity.getId());
         values.put(COLUMN_UserID, entity.getUserId());
-        values.put(COLUMN_FIRSTNAME, entity.getFirstname());
-        values.put(COLUMN_LASTNAME, entity.getLastName());
-        values.put(COLUMN_UserIMAGE, entity.getUserImage());
-        values.put(COLUMN_SYMBOLIMAGE, entity.getSymbolImage());
-        values.put(COLUMN_ELECTIONTYPEID, entity.getElectionTypeId());
+        values.put(COLUMN_screenName, entity.getscreenName());
+        values.put(COLUMN_email, entity.getemail());
+        values.put(COLUMN_password, entity.getString());
+       values.put(COLUMN_obNumber, entity.getobNumber());
         db.update(
                 TABLE_NAME,
                 values,
@@ -135,12 +141,11 @@ public class UserRepositoryImpl {
             do {
                 final User User = new User.Builder()
                         .id(cursor.getLong(cursor.getColumnIndex(COLUMN_ID)))
-                        .symbolImage(cursor.getBlob(cursor.getColumnIndex(COLUMN_SYMBOLIMAGE)))
-                        .firstname(cursor.getString(cursor.getColumnIndex(COLUMN_FIRSTNAME)))
-                        .lastName(cursor.getString(cursor.getColumnIndex(COLUMN_LASTNAME)))
-                        .UserImage(cursor.getBlob(cursor.getColumnIndex(COLUMN_UserIMAGE)))
+                        .screenName(cursor.getString(cursor.getColumnIndex(COLUMN_screenName)))
+                        .email(cursor.getString(cursor.getColumnIndex(COLUMN_email)))
+                        .password(cursor.getString(cursor.getColumnIndex(COLUMN_password)))
                         .UserId(cursor.getString(cursor.getColumnIndex(COLUMN_UserID)))
-                        .electionTypeId(cursor.getString(cursor.getColumnIndex(COLUMN_ELECTIONTYPEID)))
+                        .obNumber(cursor.getString(cursor.getColumnIndex(COLUMN_obNumber)))
                         .build();
                 Users.add(User);
             } while (cursor.moveToNext());

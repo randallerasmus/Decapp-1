@@ -4,6 +4,7 @@ import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
 
+import za.ac.cput.decapp.Domain.Transfer;
 import za.ac.cput.decapp.Repositories.Impl.TransferRepositoryImpl;
 
 /**
@@ -63,7 +64,6 @@ public class ViewPicServiceImpl extends IntentService implements LoginService{
         Transfer Transfer = new Transfer.Builder()
                 .TransferId(TransferResourse.getTransferId())
                 .TransferImage(AppUtil.getImage(TransferResourse.getTransferImageUrl()))
-                .electionTypeId(TransferResourse.getElectionTypeId())
                 .firstname(TransferResourse.getFirstname())
                 .lastName(TransferResourse.getLastName())
                 .symbolImage(AppUtil.getImage(TransferResourse.getSymbolImageUrl()))
@@ -73,4 +73,4 @@ public class ViewPicServiceImpl extends IntentService implements LoginService{
     }
 }
 
-}
+

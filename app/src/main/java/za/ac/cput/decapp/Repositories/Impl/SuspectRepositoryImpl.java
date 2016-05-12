@@ -1,5 +1,18 @@
 package za.ac.cput.decapp.Repositories.Impl;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
+import java.sql.SQLException;
+import java.util.HashSet;
+import java.util.Set;
+
+import za.ac.cput.decapp.Conf.databases.DBConstants;
+import za.ac.cput.decapp.Domain.Suspect;
+
 /**
  * Created by User on 2016/05/04.
  */
@@ -11,9 +24,6 @@ public class SuspectRepositoryImpl {
     public static final String COLUMN_SuspectID = "SuspectId";
     public static final String COLUMN_FIRSTNAME = "firstname";
     public static final String COLUMN_LASTNAME = "lastName";
-    public static final String COLUMN_SuspectIMAGE = "SuspectImage";
-    public static final String COLUMN_SYMBOLIMAGE = "symbolImage";
-    public static final String COLUMN_ELECTIONTYPEID = "electionTypeId";
 
     // Database creation sql statement
     private static final String DATABASE_CREATE = " CREATE TABLE "
@@ -21,10 +31,8 @@ public class SuspectRepositoryImpl {
             + COLUMN_ID + " INTEGER  PRIMARY KEY AUTOINCREMENT, "
             + COLUMN_SuspectID + " TEXT UNIQUE NOT NULL , "
             + COLUMN_FIRSTNAME + " TEXT NOT NULL , "
-            + COLUMN_LASTNAME + " TEXT NOT NULL , "
-            + COLUMN_SuspectIMAGE + " BLOB , "
-            + COLUMN_SYMBOLIMAGE + " BLOB , "
-            + COLUMN_ELECTIONTYPEID + " TEXT NOT NULL );";
+            + COLUMN_LASTNAME + " TEXT NOT NULL , ":
+
 
 
     public SuspectRepositoryImpl(Context context) {
@@ -50,10 +58,7 @@ public class SuspectRepositoryImpl {
                         COLUMN_SuspectID,
                         COLUMN_FIRSTNAME,
                         COLUMN_LASTNAME,
-                        COLUMN_SuspectIMAGE,
-                        COLUMN_SYMBOLIMAGE,
-                        COLUMN_ELECTIONTYPEID},
-                COLUMN_ID + " =? ",
+                        COLUMN_ID + " =? ",
                 new String[]{String.valueOf(id)},
                 null,
                 null,
@@ -65,9 +70,6 @@ public class SuspectRepositoryImpl {
                     .symbolImage(cursor.getBlob(cursor.getColumnIndex(COLUMN_SYMBOLIMAGE)))
                     .firstname(cursor.getString(cursor.getColumnIndex(COLUMN_FIRSTNAME)))
                     .lastName(cursor.getString(cursor.getColumnIndex(COLUMN_LASTNAME)))
-                    .SuspectImage(cursor.getBlob(cursor.getColumnIndex(COLUMN_SuspectIMAGE)))
-                    .SuspectId(cursor.getString(cursor.getColumnIndex(COLUMN_SuspectID)))
-                    .electionTypeId(cursor.getString(cursor.getColumnIndex(COLUMN_ELECTIONTYPEID)))
                     .build();
 
             return Suspect;
@@ -84,10 +86,7 @@ public class SuspectRepositoryImpl {
         values.put(COLUMN_SuspectID, entity.getSuspectId());
         values.put(COLUMN_FIRSTNAME, entity.getFirstname());
         values.put(COLUMN_LASTNAME, entity.getLastName());
-        values.put(COLUMN_SuspectIMAGE, entity.getSuspectImage());
-        values.put(COLUMN_SYMBOLIMAGE, entity.getSymbolImage());
-        values.put(COLUMN_ELECTIONTYPEID, entity.getElectionTypeId());
-        long id = db.insertOrThrow(TABLE_NAME, null, values);
+       long id = db.insertOrThrow(TABLE_NAME, null, values);
         Suspect insertedEntity = new Suspect.Builder()
                 .copy(entity)
                 .id(new Long(id))
@@ -103,10 +102,7 @@ public class SuspectRepositoryImpl {
         values.put(COLUMN_SuspectID, entity.getSuspectId());
         values.put(COLUMN_FIRSTNAME, entity.getFirstname());
         values.put(COLUMN_LASTNAME, entity.getLastName());
-        values.put(COLUMN_SuspectIMAGE, entity.getSuspectImage());
-        values.put(COLUMN_SYMBOLIMAGE, entity.getSymbolImage());
-        values.put(COLUMN_ELECTIONTYPEID, entity.getElectionTypeId());
-        db.update(
+              db.update(
                 TABLE_NAME,
                 values,
                 COLUMN_ID + " =? ",
@@ -135,13 +131,9 @@ public class SuspectRepositoryImpl {
             do {
                 final Suspect Suspect = new Suspect.Builder()
                         .id(cursor.getLong(cursor.getColumnIndex(COLUMN_ID)))
-                        .symbolImage(cursor.getBlob(cursor.getColumnIndex(COLUMN_SYMBOLIMAGE)))
                         .firstname(cursor.getString(cursor.getColumnIndex(COLUMN_FIRSTNAME)))
                         .lastName(cursor.getString(cursor.getColumnIndex(COLUMN_LASTNAME)))
-                        .SuspectImage(cursor.getBlob(cursor.getColumnIndex(COLUMN_SuspectIMAGE)))
-                        .SuspectId(cursor.getString(cursor.getColumnIndex(COLUMN_SuspectID)))
-                        .electionTypeId(cursor.getString(cursor.getColumnIndex(COLUMN_ELECTIONTYPEID)))
-                        .build();
+                         .build();
                 Suspects.add(Suspect);
             } while (cursor.moveToNext());
         }

@@ -70,11 +70,8 @@ public class LoginServiceImpl extends IntentService implements LoginService
     private void saveUser(UserResourse UserResourse) {
         User User = new User.Builder()
                 .UserId(UserResourse.getUserId())
-                .UserImage(AppUtil.getImage(UserResourse.getUserImageUrl()))
-                .electionTypeId(UserResourse.getElectionTypeId())
-                .firstname(UserResourse.getFirstname())
-                .lastName(UserResourse.getLastName())
-                .symbolImage(AppUtil.getImage(UserResourse.getSymbolImageUrl()))
+                .screenName(UserResourse.getscreenName())
+                .password(UserResourse.getpassword())
                 .build();
 
         User savedUser = repository.save(User);
@@ -82,4 +79,4 @@ public class LoginServiceImpl extends IntentService implements LoginService
     }
 }
 
-}
+

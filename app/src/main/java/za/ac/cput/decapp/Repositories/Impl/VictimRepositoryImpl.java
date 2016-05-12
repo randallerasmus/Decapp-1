@@ -1,5 +1,17 @@
 package za.ac.cput.decapp.Repositories.Impl;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
+import java.sql.SQLException;
+import java.util.HashSet;
+import java.util.Set;
+
+import za.ac.cput.decapp.Conf.databases.DBConstants;
+import za.ac.cput.decapp.Domain.Victim;
+
 /**
  * Created by User on 2016/05/04.
  */
@@ -11,9 +23,6 @@ public class VictimRepositoryImpl {
     public static final String COLUMN_VictimID = "VictimId";
     public static final String COLUMN_FIRSTNAME = "firstname";
     public static final String COLUMN_LASTNAME = "lastName";
-    public static final String COLUMN_VictimIMAGE = "VictimImage";
-    public static final String COLUMN_SYMBOLIMAGE = "symbolImage";
-    public static final String COLUMN_ELECTIONTYPEID = "electionTypeId";
 
     // Database creation sql statement
     private static final String DATABASE_CREATE = " CREATE TABLE "
@@ -21,10 +30,8 @@ public class VictimRepositoryImpl {
             + COLUMN_ID + " INTEGER  PRIMARY KEY AUTOINCREMENT, "
             + COLUMN_VictimID + " TEXT UNIQUE NOT NULL , "
             + COLUMN_FIRSTNAME + " TEXT NOT NULL , "
-            + COLUMN_LASTNAME + " TEXT NOT NULL , "
-            + COLUMN_VictimIMAGE + " BLOB , "
-            + COLUMN_SYMBOLIMAGE + " BLOB , "
-            + COLUMN_ELECTIONTYPEID + " TEXT NOT NULL );";
+            + COLUMN_LASTNAME + " TEXT NOT NULL , ";
+
 
 
     public VictimRepositoryImpl(Context context) {
@@ -50,10 +57,7 @@ public class VictimRepositoryImpl {
                         COLUMN_VictimID,
                         COLUMN_FIRSTNAME,
                         COLUMN_LASTNAME,
-                        COLUMN_VictimIMAGE,
-                        COLUMN_SYMBOLIMAGE,
-                        COLUMN_ELECTIONTYPEID},
-                COLUMN_ID + " =? ",
+                         COLUMN_ID + " =? ",
                 new String[]{String.valueOf(id)},
                 null,
                 null,
@@ -62,12 +66,9 @@ public class VictimRepositoryImpl {
         if (cursor.moveToFirst()) {
             final Victim Victim = new Victim.Builder()
                     .id(cursor.getLong(cursor.getColumnIndex(COLUMN_ID)))
-                    .symbolImage(cursor.getBlob(cursor.getColumnIndex(COLUMN_SYMBOLIMAGE)))
                     .firstname(cursor.getString(cursor.getColumnIndex(COLUMN_FIRSTNAME)))
                     .lastName(cursor.getString(cursor.getColumnIndex(COLUMN_LASTNAME)))
-                    .VictimImage(cursor.getBlob(cursor.getColumnIndex(COLUMN_VictimIMAGE)))
                     .VictimId(cursor.getString(cursor.getColumnIndex(COLUMN_VictimID)))
-                    .electionTypeId(cursor.getString(cursor.getColumnIndex(COLUMN_ELECTIONTYPEID)))
                     .build();
 
             return Victim;
@@ -84,9 +85,6 @@ public class VictimRepositoryImpl {
         values.put(COLUMN_VictimID, entity.getVictimId());
         values.put(COLUMN_FIRSTNAME, entity.getFirstname());
         values.put(COLUMN_LASTNAME, entity.getLastName());
-        values.put(COLUMN_VictimIMAGE, entity.getVictimImage());
-        values.put(COLUMN_SYMBOLIMAGE, entity.getSymbolImage());
-        values.put(COLUMN_ELECTIONTYPEID, entity.getElectionTypeId());
         long id = db.insertOrThrow(TABLE_NAME, null, values);
         Victim insertedEntity = new Victim.Builder()
                 .copy(entity)
@@ -103,9 +101,6 @@ public class VictimRepositoryImpl {
         values.put(COLUMN_VictimID, entity.getVictimId());
         values.put(COLUMN_FIRSTNAME, entity.getFirstname());
         values.put(COLUMN_LASTNAME, entity.getLastName());
-        values.put(COLUMN_VictimIMAGE, entity.getVictimImage());
-        values.put(COLUMN_SYMBOLIMAGE, entity.getSymbolImage());
-        values.put(COLUMN_ELECTIONTYPEID, entity.getElectionTypeId());
         db.update(
                 TABLE_NAME,
                 values,
@@ -135,12 +130,9 @@ public class VictimRepositoryImpl {
             do {
                 final Victim Victim = new Victim.Builder()
                         .id(cursor.getLong(cursor.getColumnIndex(COLUMN_ID)))
-                        .symbolImage(cursor.getBlob(cursor.getColumnIndex(COLUMN_SYMBOLIMAGE)))
                         .firstname(cursor.getString(cursor.getColumnIndex(COLUMN_FIRSTNAME)))
                         .lastName(cursor.getString(cursor.getColumnIndex(COLUMN_LASTNAME)))
-                        .VictimImage(cursor.getBlob(cursor.getColumnIndex(COLUMN_VictimIMAGE)))
                         .VictimId(cursor.getString(cursor.getColumnIndex(COLUMN_VictimID)))
-                        .electionTypeId(cursor.getString(cursor.getColumnIndex(COLUMN_ELECTIONTYPEID)))
                         .build();
                 Victims.add(Victim);
             } while (cursor.moveToNext());
@@ -167,7 +159,7 @@ public class VictimRepositoryImpl {
                 "Upgrading database from version " + oldVersion + " to "
                         + newVersion + ", which will destroy all old data");
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-        onCreate(db);
+
 
     }
 }

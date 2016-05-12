@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="za.ac.cput.decapp">
+    package="za.ac.cput.decapp.UserInterFace">
 
     <application
         android:allowBackup="true"
@@ -15,7 +15,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".caseActivity" />
+        <activity android:name=".Wanted"/>
+        <activity android:name=".SignUp"/>
     </application>
 
 </manifest>

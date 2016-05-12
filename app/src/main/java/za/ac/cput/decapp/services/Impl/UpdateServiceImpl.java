@@ -4,6 +4,7 @@ import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
 
+import za.ac.cput.decapp.Domain.Suspect;
 import za.ac.cput.decapp.Repositories.Impl.SuspectRepositoryImpl;
 
 /**
@@ -62,8 +63,6 @@ public class UpdateServiceImpl extends IntentService implements LoginService{
     private void saveSuspect(SuspectResourse SuspectResourse) {
         Suspect Suspect = new Suspect.Builder()
                 .SuspectId(SuspectResourse.getSuspectId())
-                .SuspectImage(AppUtil.getImage(SuspectResourse.getSuspectImageUrl()))
-                .electionTypeId(SuspectResourse.getElectionTypeId())
                 .firstname(SuspectResourse.getFirstname())
                 .lastName(SuspectResourse.getLastName())
                 .symbolImage(AppUtil.getImage(SuspectResourse.getSymbolImageUrl()))
@@ -73,4 +72,4 @@ public class UpdateServiceImpl extends IntentService implements LoginService{
     }
 }
 
-}
+

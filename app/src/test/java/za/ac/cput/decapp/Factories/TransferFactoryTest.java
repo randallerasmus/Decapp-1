@@ -13,6 +13,7 @@ import za.ac.cput.decapp.Domain.Transfer;
 /**
  * Created by User on 2016/05/05.
  */
+//.THIS IS THE CLASS THAT IM STRUGGLING WITH
 public class TransferFactoryTest  {
 
         @Test

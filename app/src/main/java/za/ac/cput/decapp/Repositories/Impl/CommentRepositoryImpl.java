@@ -9,12 +9,17 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import org.w3c.dom.Comment;
 
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
 import za.ac.cput.decapp.Conf.databases.DBConstants;
 import za.ac.cput.decapp.Repositories.CommentRepository;
 
 /**
  * Created by User on 2016/05/04.
  */
+// this is like my database helper class
 public class CommentRepositoryImpl extends SQLiteOpenHelper implements CommentRepository
 {
     public static final String TABLE_NAME = "Comment";
@@ -73,12 +78,25 @@ public class CommentRepositoryImpl extends SQLiteOpenHelper implements CommentRe
             return null;
         }
     }
+//    public boolean insertData(String name, String surname)
+//    {
+//        SQLiteDatabase db = this.getWritableDatabase();
+//        ContentValues contenValues = new ContentValues();
+//        contenValues.put(COL_2,name);
+//        contenValues.put(COL_3,surname);
+//        long result = db.insert(TABLE_NAME,null,contenValues);
+//        if(result==-1)
+//            return false;
+//        else
+//            return true;
+//    }
+//}
 
     @Override
-    public Comment save(Comment entity) {
+    public Comment save(String offense,Date date) {
         open();
         ContentValues values = new ContentValues();
-        values.put(COLUMN_ID, entity.getId());
+        values.put(COLUMN_ID, id.getId());
        values.put(COLUMN_INFO, entity.getInfo());
         values.put(COLUMN_DATE, entity.getDate());
        long id = db.insertOrThrow(TABLE_NAME, null, values);
@@ -97,9 +115,6 @@ public class CommentRepositoryImpl extends SQLiteOpenHelper implements CommentRe
         values.put(COLUMN_CommentID, entity.getCommentId());
         values.put(COLUMN_INFO, entity.getFirstname());
         values.put(COLUMN_DATE, entity.getLastName());
-        values.put(COLUMN_CommentIMAGE, entity.getCommentImage());
-        values.put(COLUMN_SYMBOLIMAGE, entity.getSymbolImage());
-        values.put(COLUMN_ELECTIONTYPEID, entity.getElectionTypeId());
         db.update(
                 TABLE_NAME,
                 values,
@@ -122,6 +137,7 @@ public class CommentRepositoryImpl extends SQLiteOpenHelper implements CommentRe
     @Override
     public Set<Comment> findAll() {
         SQLiteDatabase db = this.getReadableDatabase();
+
         Set<Comment> Comments = new HashSet<>();
         open();
         Cursor cursor = db.query(TABLE_NAME, null,null,null,null,null,null);
@@ -129,12 +145,8 @@ public class CommentRepositoryImpl extends SQLiteOpenHelper implements CommentRe
             do {
                 final Comment Comment = new Comment.Builder()
                         .id(cursor.getLong(cursor.getColumnIndex(COLUMN_ID)))
-                        .symbolImage(cursor.getBlob(cursor.getColumnIndex(COLUMN_SYMBOLIMAGE)))
-                        .firstname(cursor.getString(cursor.getColumnIndex(COLUMN_INFO)))
-                        .lastName(cursor.getString(cursor.getColumnIndex(COLUMN_DATE)))
-                        .CommentImage(cursor.getBlob(cursor.getColumnIndex(COLUMN_CommentIMAGE)))
-                        .CommentId(cursor.getString(cursor.getColumnIndex(COLUMN_CommentID)))
-                        .electionTypeId(cursor.getString(cursor.getColumnIndex(COLUMN_ELECTIONTYPEID)))
+                        .info(cursor.getString(cursor.getColumnIndex(COLUMN_INFO)))
+                        .date(cursor.getString(cursor.getColumnIndex(COLUMN_DATE)))
                         .build();
                 Comments.add(Comment);
             } while (cursor.moveToNext());
@@ -159,7 +171,7 @@ public class CommentRepositoryImpl extends SQLiteOpenHelper implements CommentRe
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         Log.w(this.getClass().getName(),
                 "Upgrading database from version " + oldVersion + " to "
-                        + newVersion + ", which will destroy all old data");
+                        + newVersion + ", THIS WILL OVERWRITE OLD DATE");
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
 

@@ -66,4 +66,4 @@ public class LawServiceImpl extends Service implements LawService{
     }
 }
 
-}
+

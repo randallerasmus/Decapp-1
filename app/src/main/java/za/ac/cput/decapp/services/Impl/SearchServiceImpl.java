@@ -4,6 +4,7 @@ import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
 
+import za.ac.cput.decapp.Domain.Suspect;
 import za.ac.cput.decapp.Repositories.Impl.SuspectRepositoryImpl;
 
 /**
@@ -72,4 +73,4 @@ public class SearchServiceImpl extends IntentService implements LoginService {
     }
 }
 
-}
+

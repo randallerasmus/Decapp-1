@@ -14,18 +14,14 @@ import za.ac.cput.decapp.Repositories.CaseRepository;
  */
 public class CaseRepositoryImpl  extends SQLiteOpenHelper implements CaseRepository
 {
+    public static final String DATABASE_NAME = "case.db";
     public static final String TABLE_NAME = "case";
-    private SQLiteDatabase db;
-
     public static final String COLUMN_ID = "id";
     public static final String COLUMN_OFFENSE = "offense";
     public static final String COLUMN_DATE = "date";
 
-    private static final String DATABASE_CREATE = "CREATE TABLE"
-            + TABLE_NAME + "("
-            + COLUMN_ID +"INTEGER PRIMARY KEY AUTOINCREMENT,"
-            + COLUMN_OFFENSE + "OFFENSE TEXT ,"
-            + COLUMN_DATE + "DATE NOT NULL FORMAT 'YYYY-MM-DD);";
+    private SQLiteDatabase db;
+
 
     public CaseRepositoryImpl (Context context)
     {
@@ -34,20 +30,26 @@ public class CaseRepositoryImpl  extends SQLiteOpenHelper implements CaseReposit
 
     public void open()throws SQLException
     {
-        db.this.getWritableDatabase();
+        SQLiteDatabase db = this.getWritableDatabase();
     }
     public void close()
     {this.close();
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db) {
+    public void onCreate(SQLiteDatabase db)
+    {
+       db.execSQL("CREATE TABLE"+ TABLE_NAME + "("+ COLUMN_ID +"INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + COLUMN_OFFENSE + "OFFENSE TEXT ,"+ COLUMN_DATE + "DATE NOT NULL FORMAT 'YYYY-MM-DD');");
 
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
+    {
 
+        db.execSQL("DROP TABLE IF EXIST" + TABLE_NAME);
+        onCreate(db);
     }
 
     @Override

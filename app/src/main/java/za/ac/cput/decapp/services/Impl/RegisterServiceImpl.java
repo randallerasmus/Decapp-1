@@ -4,6 +4,7 @@ import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
 
+import za.ac.cput.decapp.Domain.User;
 import za.ac.cput.decapp.Repositories.Impl.UserRepositoryImpl;
 import za.ac.cput.decapp.services.LoginService;
 
@@ -63,15 +64,12 @@ public class RegisterServiceImpl extends IntentService implements LoginService {
     private void saveUser(UserResourse UserResourse) {
         User User = new User.Builder()
                 .UserId(UserResourse.getUserId())
-                .UserImage(AppUtil.getImage(UserResourse.getUserImageUrl()))
-                .electionTypeId(UserResourse.getElectionTypeId())
                 .firstname(UserResourse.getFirstname())
                 .lastName(UserResourse.getLastName())
-                .symbolImage(AppUtil.getImage(UserResourse.getSymbolImageUrl()))
                 .build();
         User savedUser = repository.save(User);
 
     }
 }
 
-}
+
