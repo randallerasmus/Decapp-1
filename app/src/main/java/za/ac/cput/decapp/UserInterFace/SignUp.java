@@ -1,10 +1,9 @@
 package za.ac.cput.decapp.UserInterFace;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 
-import za.ac.cput.decapp.R;
+
 
 /**
  * Created by User on 2016/05/12.
