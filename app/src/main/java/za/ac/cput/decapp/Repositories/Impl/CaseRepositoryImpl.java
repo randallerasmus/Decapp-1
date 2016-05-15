@@ -52,12 +52,4 @@ public class CaseRepositoryImpl  extends SQLiteOpenHelper implements CaseReposit
         onCreate(db);
     }
 
-    @Override
-    public Case findById(Long id)
-    {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Curson cursor =db.query(
-                TABLE_NAME,
-        )
-    }
-}
+   }

@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import org.w3c.dom.Comment;
 
@@ -180,4 +181,4 @@ public class CommentRepositoryImpl extends SQLiteOpenHelper implements CommentRe
 
 
 
-}
+

@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends AppCompatActivity implements View.OnClickListener
 {
 //    DatabaseHelper mydb;
 
@@ -19,26 +19,30 @@ public class MainActivity extends AppCompatActivity
         //type casting to buttons for Actionlisteners
         Button btnSignUp =(Button)findViewById(R.id.btnSignUp);
        Button btnCancel = (Button)findViewById(R.id.btnCancel);
+        Button btnLogin = (Button)findViewById(R.id.btnLogin);
 
         //this also works like a charm
-        btnSignUp.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick (View v)
-            {
-                Intent intent = new Intent(getApplicationContext(), SignUp.class);
-                startActivity(intent);
-            }
+        btnSignUp.setOnClickListener(this);
+        btnCancel.setOnClickListener(this);
+        btnLogin.setOnClickListener(this);
+    }
 
-
-        });
-        //this definitely works 100% correct
-        btnCancel.setOnClickListener(new View.OnClickListener()
+    @Override
+    public void onClick(View v)
+    {
+        switch (v.getId())
         {
-            @Override
-            public void onClick(View v)
-            {
+            case R.id.btnSignUp:
+                Intent signUpIntent = new Intent(MainActivity.this,SignUp.class);
+                startActivity(signUpIntent);
+
+            case R.id.btnCancel:
                 System.exit(0);
-            }
-        });
+
+            case R.id.btnLogin:
+                Intent decappIntent = new Intent(MainActivity.this,Decapp.class);
+                startActivity(decappIntent);
+        }
+
     }
 }

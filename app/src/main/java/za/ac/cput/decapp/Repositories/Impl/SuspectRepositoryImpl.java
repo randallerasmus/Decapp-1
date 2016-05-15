@@ -31,7 +31,7 @@ public class SuspectRepositoryImpl {
             + COLUMN_ID + " INTEGER  PRIMARY KEY AUTOINCREMENT, "
             + COLUMN_SuspectID + " TEXT UNIQUE NOT NULL , "
             + COLUMN_FIRSTNAME + " TEXT NOT NULL , "
-            + COLUMN_LASTNAME + " TEXT NOT NULL , ":
+            + COLUMN_LASTNAME + " TEXT NOT NULL , ";
 
 
 
@@ -62,8 +62,7 @@ public class SuspectRepositoryImpl {
                 new String[]{String.valueOf(id)},
                 null,
                 null,
-                null,
-                null);
+                 null);
         if (cursor.moveToFirst()) {
             final Suspect Suspect = new Suspect.Builder()
                     .id(cursor.getLong(cursor.getColumnIndex(COLUMN_ID)))
