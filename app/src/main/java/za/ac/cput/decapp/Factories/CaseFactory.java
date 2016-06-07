@@ -2,17 +2,15 @@ package za.ac.cput.decapp.Factories;
 
 import za.ac.cput.decapp.Domain.Case;
 
-import java.util.Date;
-
 /**
  * Created by User on 2016/04/24.
  */
 public class CaseFactory {
-    public static Case getCase(String offense, Date date) {
+    public static Case getCase(Long id,String offense, String offenseLocation) {
         Case cas = new Case.Builder()
-//                .id(id)
+                .id(id)
                 .offense(offense)
-                .date(new Date())
+                .offenseLocation(offenseLocation)
                 .build();
 
         return cas;

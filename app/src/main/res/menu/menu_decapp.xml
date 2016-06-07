@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/scanSuspects"
+        android:title="Scan Suspects"
+        />
+    <item
+        android:id="@+id/searchSuspects"
+        android:title="Search Suspects"
+        />
+    <item
+        android:id="@+id/removeSuspects"
+        android:title="Remove Suspects"
+        />
+    <item
+        android:id="@+id/editSuspects"
+        android:title="Edit Suspects"
+        />
+</menu>

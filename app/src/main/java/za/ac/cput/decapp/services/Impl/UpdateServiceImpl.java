@@ -6,6 +6,9 @@ import android.content.Intent;
 
 import za.ac.cput.decapp.Domain.Suspect;
 import za.ac.cput.decapp.Repositories.Impl.SuspectRepositoryImpl;
+import za.ac.cput.decapp.Repositories.Interfaces.SuspectRepository;
+import za.ac.cput.decapp.Repositories.Repository;
+import za.ac.cput.decapp.services.UpdateInfoService;
 
 /**
  * Created by User on 2016/05/04.
@@ -13,31 +16,31 @@ import za.ac.cput.decapp.Repositories.Impl.SuspectRepositoryImpl;
 // this service will be used to update the information of suspect with relevant information
     // that is verified
     // this is a bound service
-public class UpdateServiceImpl extends IntentService implements LoginService{
-    private static SuspectServiceImpl service = null;
+public  abstract class UpdateServiceImpl extends IntentService implements UpdateInfoService{
+    private static UpdateServiceImpl service = null;
 
-    public static SuspectServiceImpl getInstance() {
+    public static UpdateServiceImpl getInstance() {
         if (service == null)
-            service = new SuspectServiceImpl();
+            service = new UpdateServiceImpl();
         return service;
     }
 
-    private SuspectServiceImpl() {
-        super("SuspectServiceImpl");
+    private UpdateServiceImpl() {
+        super("UpdateServiceImpl");
         repository = new SuspectRepositoryImpl(App.getAppContext());
     }
 
     @Override
-    public void addSuspect(Context context, SuspectResourse SuspectResourse) {
-        Intent intent = new Intent(context, SuspectServiceImpl.class);
-        intent.setAction(ACTION_ADD);
-        intent.putExtra(EXTRA_ADD, SuspectResourse);
+    public void addSuspect(Context context, UpdateInfoService UpdateInfoService) {
+        Intent intent = new Intent(context, UpdateServiceImpl.class);
+        intent.setAction(addSuspect(context,UpdateInfoService,"");
+        intent.putExtra(addInfo();, UpdateInfoService);
         context.startService(intent);
     }
 
     @Override
     public void resetSuspects(Context context) {
-        Intent intent = new Intent(context, SuspectServiceImpl.class);
+        Intent intent = new Intent(context, UpdateServiceImpl.class);
         intent.setAction(ACTION_RESET);
         context.startService(intent);
 
@@ -48,8 +51,8 @@ public class UpdateServiceImpl extends IntentService implements LoginService{
         if (intent != null) {
             final String action = intent.getAction();
             if (ACTION_ADD.equals(action)) {
-                final SuspectResource SuspectResource = (SuspectResource) intent.getSerializableExtra(EXTRA_ADD);
-                saveSuspect(SuspectResourse);
+                final UpdateInfoService UpdateInfoService = (UpdateInfoService) intent.getSerializableExtra(EXTRA_ADD);
+                saveSuspect(UpdateInfoService);
             } else if (ACTION_RESET.equals(action)) {
                 resetSuspectsRecords();
             }
@@ -57,15 +60,14 @@ public class UpdateServiceImpl extends IntentService implements LoginService{
     }
 
     private void resetSuspectsRecords() {
-        repository.deleteAll();
+        Repository.deleteAll();
     }
 
-    private void saveSuspect(SuspectResourse SuspectResourse) {
+    private void saveSuspect(UpdateInfoService UpdateInfoService) {
         Suspect Suspect = new Suspect.Builder()
-                .SuspectId(SuspectResourse.getSuspectId())
-                .firstname(SuspectResourse.getFirstname())
-                .lastName(SuspectResourse.getLastName())
-                .symbolImage(AppUtil.getImage(SuspectResourse.getSymbolImageUrl()))
+                .SuspectId(UpdateInfoService.getSuspectId())
+                .firstname(UpdateInfoService.getFirstname())
+                .lastName(UpdateInfoService.getLastName())
                 .build();
         Suspect savedSuspect = repository.save(Suspect);
 

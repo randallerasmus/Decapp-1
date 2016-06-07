@@ -1,12 +1,8 @@
 package za.ac.cput.decapp.Factories;
 
 import junit.framework.Assert;
-import junit.framework.TestCase;
 
 import org.junit.Test;
-
-import java.util.Date;
-
 
 import za.ac.cput.decapp.Domain.Case;
 
@@ -18,20 +14,21 @@ public class CaseFactoryTest  {
     @Test
     public void testCreate ()throws Exception
     {
-        Case Case = CaseFactory.getCase("ArmedRobbery",new Date());
-        Assert.assertEquals("ArmedRobbery",new Date());
+        Case aCase = CaseFactory.getCase(null,"ArmedRobbery","Harare");
+        Assert.assertEquals("ArmedRobbery","Harare",aCase);
     }
 
     @Test
     public void testUpdate()throws Exception
     {
-        Case Case = CaseFactory.getCase("ArmedRobbery",new Date());
+        Case Case = CaseFactory.getCase(null,"ArmedRobbery","Cape Town");
         Case newCase = new Case
                 .Builder()
+                .copy(Case)
                 .offense("Robbery")
-                .date(new Date())
+                .offenseLocation("Lesotho")
                 .build();
         Assert.assertEquals("Robbery",newCase.getOffense());
-        Assert.assertEquals("Sun May 08 02:33",newCase.getDate());
+        Assert.assertEquals("Lesotho",newCase.getOffenseLocation());
     }
 }

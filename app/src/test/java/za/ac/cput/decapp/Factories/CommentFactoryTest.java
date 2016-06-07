@@ -1,11 +1,8 @@
 package za.ac.cput.decapp.Factories;
 
 import junit.framework.Assert;
-import junit.framework.TestCase;
 
 import org.junit.Test;
-
-import java.util.Date;
 
 import za.ac.cput.decapp.Domain.Comment;
 
@@ -17,21 +14,21 @@ public class CommentFactoryTest {
     @Test
     public void testCreateComment() throws Exception {
 
-        Comment Comment = CommentFactory.getComment("Huge nose",new Date());
-        Assert.assertEquals("Huge nose",new Date());
+        Comment Comment = CommentFactory.getComment("Huge nose","SGt ERasmus");
+        Assert.assertEquals("Huge nose","Sgt. Roberts",Comment);
         }
     @Test
     public void testUpdate () throws Exception
     {
-        Comment comment = CommentFactory.getComment("Huge nose",new Date());
+        Comment comment = CommentFactory.getComment("Huge nose","Sgt Roberts");
         Comment newComment = new Comment
                 .Builder()
-//                .copy(Comment)
+                .copy(comment)
                 .info("Huge Nose")
-                .date(new Date())
+                .commentOfficial("Sgt Erasmus")
                 .build();
 
         Assert.assertEquals("Huge Nose",newComment.getInfo());
-        Assert.assertEquals("Huge nose",newComment.getInfo());
+        Assert.assertEquals("Sgt.Erasmus",newComment.getCommentOfficial());
     }
 }

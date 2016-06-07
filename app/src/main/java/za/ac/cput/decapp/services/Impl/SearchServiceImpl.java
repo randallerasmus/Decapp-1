@@ -6,6 +6,7 @@ import android.content.Intent;
 
 import za.ac.cput.decapp.Domain.Suspect;
 import za.ac.cput.decapp.Repositories.Impl.SuspectRepositoryImpl;
+import za.ac.cput.decapp.services.LoginService;
 
 /**
  * Created by User on 2016/05/04.
@@ -19,6 +20,10 @@ public class SearchServiceImpl extends IntentService implements LoginService {
         if (service == null)
             service = new SuspectServiceImpl();
         return service;
+    }
+    public SearchServiceImpl()
+    {
+
     }
 
     private SuspectServiceImpl() {

@@ -1,7 +1,6 @@
 package za.ac.cput.decapp.Domain;
 
 import java.io.Serializable;
-import java.sql.Blob;
 import java.util.Date;
 
 /**
@@ -10,13 +9,23 @@ import java.util.Date;
 public class Transfer implements Serializable
 {
     private Long id;
-    private Blob pic;
+    private byte[] suspectImage;
     private Date date;
+    private String TransferId;
+
+
+    public static Builder newBuilder(Transfer copy) {
+        Builder builder = new Builder();
+        builder.TransferId = copy.TransferId;
+        return builder;
+    }
+
+    public String getTransferId() {
+        return TransferId;
+    }
 
     private Transfer(Builder builder) {
-        setId(builder.id);
-        setPic(builder.pic);
-        setDate(builder.date);
+        TransferId = builder.TransferId;
     }
 
     public Long getId() {
@@ -27,16 +36,12 @@ public class Transfer implements Serializable
         this.id = id;
     }
 
-//    public static Builder newTransfer() {
-//        return new Builder();
-//    }
-
-    public Blob getPic() {
-        return pic;
+    public byte[] getsuspectImage() {
+        return suspectImage;
     }
 
-    public void setPic(Blob pic) {
-        this.pic = pic;
+    public void setsuspectImage(byte[] suspectImage) {
+        this.suspectImage = suspectImage;
     }
 
     public Date getDate() {
@@ -51,29 +56,31 @@ public class Transfer implements Serializable
     }
 
     public static final class Builder {
-        private Blob pic;
+        private byte[] suspectImage;
         private Date date;
         private Long id;
+        private String TransferId;
 
-        public Builder(Blob pic) {
-            this.pic = pic;
+        public Builder(byte[] suspectImage) {
+            this.suspectImage = suspectImage;
         }
 
         public Builder() {
         }
 
-        public Builder(Transfer copy) {
+        public Builder copy(Transfer copy) {
             this.id = copy.id;
-            this.pic = copy.pic;
+            this.suspectImage = copy.suspectImage;
             this.date = copy.date;
+            return this;
         }
 
         public Transfer build() {
             return new Transfer(this);
         }
 
-        public Builder pic(Blob pic) {
-            this.pic = pic;
+        public Builder suspectImage(byte[] suspectImage) {
+            this.suspectImage = suspectImage;
             return this;
         }
 
@@ -84,6 +91,11 @@ public class Transfer implements Serializable
 
         public Builder id(Long id) {
             this.id = id;
+            return this;
+        }
+
+        public Builder TransferId(String val) {
+            TransferId = val;
             return this;
         }
     }

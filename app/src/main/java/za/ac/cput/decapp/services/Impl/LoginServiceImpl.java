@@ -1,13 +1,15 @@
 package za.ac.cput.decapp.services.Impl;
 
-import android.app.IntentService;
-import android.content.Context;
+import android.app.Service;
 import android.content.Intent;
+import android.os.Binder;
+import android.os.IBinder;
+
+import java.util.Set;
 
 import za.ac.cput.decapp.Domain.User;
 import za.ac.cput.decapp.Repositories.Impl.UserRepositoryImpl;
-import za.ac.cput.decapp.Repositories.UserRepository;
-import za.ac.cput.decapp.services.LoginService;
+import za.ac.cput.decapp.Repositories.Interfaces.UserRepository;
 
 /**
  * Created by User on 2016/05/04.
@@ -16,67 +18,49 @@ import za.ac.cput.decapp.services.LoginService;
     // and can only used while on duty due to security constraints
     // this is a started service
 
-public class LoginServiceImpl extends IntentService implements LoginService
-{
+public class LoginServiceImpl extends Service  {
+    final private UserRepository userRepository;
+    private static LoginServiceImpl service = null;
 
-    private final UserRepository repo;
-
-    private static UserServiceImpl service = null;
-
-    public static UserServiceImpl getInstance() {
+    public static LoginServiceImpl getInstance() {
         if (service == null)
-            service = new UserServiceImpl();
+            service = new LoginServiceImpl();
         return service;
     }
 
-    private UserServiceImpl() {
-        super("UserServiceImpl");
-        repository = new UserRepositoryImpl(App.getAppContext());
+    public LoginServiceImpl() {
+        userRepository = new UserRepositoryImpl(userRepository.save()) {
+        };
     }
 
-    @Override
-    public void addUser(Context context, UserResourse UserResourse) {
-        Intent intent = new Intent(context, UserServiceImpl.class);
-        intent.setAction(ACTION_ADD);
-        intent.putExtra(EXTRA_ADD, UserResourse);
-        context.startService(intent);
-    }
+    private final IBinder localBinder = new LoginServiceBinder();
 
-    @Override
-    public void resetUsers(Context context) {
-        Intent intent = new Intent(context, UserServiceImpl.class);
-        intent.setAction(ACTION_RESET);
-        context.startService(intent);
-
-    }
-
-    @Override
-    protected void onHandleIntent(Intent intent) {
-        if (intent != null) {
-            final String action = intent.getAction();
-            if (ACTION_ADD.equals(action)) {
-                final UserResource UserResource = (UserResource) intent.getSerializableExtra(EXTRA_ADD);
-                saveUser(UserResourse);
-            } else if (ACTION_RESET.equals(action)) {
-                resetUsersRecords();
-            }
+    public class LoginServiceBinder extends Binder {
+        public LoginServiceImpl getService() {
+            return LoginServiceImpl.this;
         }
     }
 
-    private void resetUsersRecords() {
-        repository.deleteAll();
+    @Override
+    public IBinder onBind(Intent intent) {
+        // TODO: Return the communication channel to the service.
+        return localBinder;
     }
 
-    private void saveUser(UserResourse UserResourse) {
-        User User = new User.Builder()
-                .UserId(UserResourse.getUserId())
-                .screenName(UserResourse.getscreenName())
-                .password(UserResourse.getpassword())
-                .build();
+    @Override
+    public boolean checkActivition() {
+        Set<User> persons = userRepository.findAll();
+        return persons.size() > 0;
+    }
 
-        User savedUser = repository.save(User);
-
+    @Override
+    public boolean checkLogin(String emailAddress, String password) {
+        boolean loggedIn = false;
+        Set<User> persons = userRepository.findAll();
+        for (User person : persons) {
+            loggedIn = BCrypt.checkpw(password, person.getAuthvalue());
+        }
+        return loggedIn;
     }
 }
-
 

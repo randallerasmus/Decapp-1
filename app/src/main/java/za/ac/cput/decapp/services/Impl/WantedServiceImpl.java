@@ -4,40 +4,44 @@ import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
 
-import za.ac.cput.decapp.Domain.Suspect;
-import za.ac.cput.decapp.Repositories.Impl.SuspectRepositoryImpl;
+import za.ac.cput.decapp.Domain.Wanted;
+import za.ac.cput.decapp.Repositories.Impl.WantedRepositoryImpl;
 import za.ac.cput.decapp.services.LoginService;
 
 /**
  * Created by User on 2016/05/04.
  */
 // this service will be used mainly by detectives to alert the uniform branch about a
-    // list of suspects that are wanted with the type of crime they are wanted for
+    // list of Wanteds that are wanted with the type of crime they are wanted for
 public class WantedServiceImpl extends IntentService implements LoginService {
-    private static SuspectServiceImpl service = null;
+    private static WantedServiceImpl service = null;
 
-    public static SuspectServiceImpl getInstance() {
+    public static WantedServiceImpl getInstance() {
         if (service == null)
-            service = new SuspectServiceImpl();
+            service = new WantedServiceImpl();
         return service;
     }
+    public WantedServiceImpl()
+    {
 
-    private SuspectServiceImpl() {
-        super("SuspectServiceImpl");
-        repository = new SuspectRepositoryImpl(App.getAppContext());
+    }
+
+    private WantedServiceImpl() {
+        super("WantedServiceImpl");
+        repository = new WantedRepositoryImpl(App.getAppContext());
     }
 
     @Override
-    public void addSuspect(Context context, SuspectResourse SuspectResourse) {
-        Intent intent = new Intent(context, SuspectServiceImpl.class);
+    public void addWanted(Context context, WantedResourse WantedResourse) {
+        Intent intent = new Intent(context, WantedServiceImpl.class);
         intent.setAction(ACTION_ADD);
-        intent.putExtra(EXTRA_ADD, SuspectResourse);
+        intent.putExtra(EXTRA_ADD, WantedResourse);
         context.startService(intent);
     }
 
     @Override
-    public void resetSuspects(Context context) {
-        Intent intent = new Intent(context, SuspectServiceImpl.class);
+    public void resetWanteds(Context context) {
+        Intent intent = new Intent(context, WantedServiceImpl.class);
         intent.setAction(ACTION_RESET);
         context.startService(intent);
 
@@ -48,28 +52,28 @@ public class WantedServiceImpl extends IntentService implements LoginService {
         if (intent != null) {
             final String action = intent.getAction();
             if (ACTION_ADD.equals(action)) {
-                final SuspectResource SuspectResource = (SuspectResource) intent.getSerializableExtra(EXTRA_ADD);
-                saveSuspect(SuspectResourse);
+                final WantedResource WantedResource = (WantedResource) intent.getSerializableExtra(EXTRA_ADD);
+                saveWanted(WantedResourse);
             } else if (ACTION_RESET.equals(action)) {
-                resetSuspectsRecords();
+                resetWantedsRecords();
             }
         }
     }
 
-    private void resetSuspectsRecords() {
+    private void resetWantedsRecords() {
         repository.deleteAll();
     }
 
-    private void saveSuspect(SuspectResourse SuspectResourse) {
-        Suspect Suspect = new Suspect.Builder()
-                .SuspectId(SuspectResourse.getSuspectId())
-                .SuspectImage(AppUtil.getImage(SuspectResourse.getSuspectImageUrl()))
-                .electionTypeId(SuspectResourse.getElectionTypeId())
-                .firstname(SuspectResourse.getFirstname())
-                .lastName(SuspectResourse.getLastName())
-                .symbolImage(AppUtil.getImage(SuspectResourse.getSymbolImageUrl()))
+    private void saveWanted(WantedResourse WantedResourse) {
+        Wanted Wanted = new Wanted.Builder()
+                .WantedId(WantedResourse.getWantedId())
+                .WantedImage(AppUtil.getImage(WantedResourse.getWantedImageUrl()))
+                .electionTypeId(WantedResourse.getElectionTypeId())
+                .firstname(WantedResourse.getFirstname())
+                .lastName(WantedResourse.getLastName())
+                .symbolImage(AppUtil.getImage(WantedResourse.getSymbolImageUrl()))
                 .build();
-        Suspect savedSuspect = repository.save(Suspect);
+        Wanted savedWanted = repository.save(Wanted);
 
     }
 }

@@ -7,13 +7,13 @@ import za.ac.cput.decapp.Domain.User;
  * Created by User on 2016/04/24.
  */
 public class UserFactory {
-    public static User getUser (String screenName, String email,String password, String obNumber)
+    public static User getUser (String username, String password, String authorizationNumber)
     {
         User usr = new User
-                .Builder(screenName)
-                .email(email)
+                .Builder()
+                .username(username)
                 .password(password)
-                .obNumber(obNumber)
+                .authorizationNumber(authorizationNumber)
                 .build();
 
         return usr;

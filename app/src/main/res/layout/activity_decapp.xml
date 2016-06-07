@@ -5,8 +5,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal">
+        android:layout_height="match_parent">
 
         <TextView
             android:layout_width="wrap_content"
@@ -16,82 +15,63 @@
             android:id="@+id/textView13"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="38dp" />
+            android:layout_marginTop="51dp" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Snap Face"
-            android:id="@+id/button6"
-            android:layout_marginTop="55dp"
+            android:id="@+id/btnSnapFace"
             android:layout_below="@+id/textView13"
-            android:layout_alignRight="@+id/button10"
-            android:layout_alignEnd="@+id/button10" />
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="85dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Scan Suspects"
-            android:id="@+id/button7"
-            android:layout_alignTop="@+id/button6"
-            android:layout_toRightOf="@+id/button6"
-            android:layout_toEndOf="@+id/button6"
-            android:layout_marginLeft="36dp"
-            android:layout_marginStart="36dp" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Search Suspects"
-            android:id="@+id/button8"
-            android:layout_below="@+id/button6"
-            android:layout_toRightOf="@+id/button11"
-            android:layout_toEndOf="@+id/button11" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Remove Suspects"
-            android:id="@+id/button9"
-            android:layout_below="@+id/button8"
-            android:layout_alignLeft="@+id/button7"
-            android:layout_alignStart="@+id/button7" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Edit Suspects"
-            android:id="@+id/button10"
-            android:layout_below="@+id/button8"
-            android:layout_toLeftOf="@+id/textView13"
-            android:layout_toStartOf="@+id/textView13" />
+            android:text="Suspects"
+            android:id="@+id/btnSuspects"
+            android:layout_below="@+id/btnSnapFace"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:onClick="onSuspectButtonClick" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Wanteds"
-            android:id="@+id/button11"
-            android:layout_below="@+id/button10"
-            android:layout_alignLeft="@+id/button10"
-            android:layout_alignStart="@+id/button10" />
+            android:id="@+id/btnWanteds"
+            android:layout_below="@+id/btnDangerZone"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Danger Zone"
-            android:id="@+id/button12"
-            android:layout_below="@+id/button9"
-            android:layout_alignRight="@+id/button8"
-            android:layout_alignEnd="@+id/button8" />
+            android:id="@+id/btnDangerZone"
+            android:layout_below="@+id/btnSuspects"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Law Update"
-            android:id="@+id/button13"
-            android:layout_below="@+id/button11"
-            android:layout_toRightOf="@+id/button11"
-            android:layout_toEndOf="@+id/button11"
-            android:layout_marginTop="23dp" />
+            android:id="@+id/btnLawUpdate"
+            android:layout_below="@+id/btnWanteds"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
     </RelativeLayout>
 </LinearLayout>

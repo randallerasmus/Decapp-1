@@ -23,6 +23,11 @@ public class RegisterServiceImpl extends IntentService implements LoginService {
         return service;
     }
 
+    public RegisterServiceImpl()
+    {
+
+    }
+
     private UserServiceImpl() {
         super("UserServiceImpl");
         repository = new UserRepositoryImpl(App.getAppContext());
@@ -31,7 +36,7 @@ public class RegisterServiceImpl extends IntentService implements LoginService {
     @Override
     public void addUser(Context context, UserResourse UserResourse) {
         Intent intent = new Intent(context, UserServiceImpl.class);
-        intent.setAction(ACTION_ADD);
+        intent.setAction(ACTION);
         intent.putExtra(EXTRA_ADD, UserResourse);
         context.startService(intent);
     }

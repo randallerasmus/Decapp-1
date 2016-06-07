@@ -1,7 +1,6 @@
 package za.ac.cput.decapp.Factories;
 
 import junit.framework.Assert;
-import junit.framework.TestCase;
 
 import org.junit.Test;
 
@@ -18,14 +17,15 @@ public class VictimFactoryTest {
         public void testCreateVictim() throws Exception {
 
             Victim Victim = VictimFactory.getVictim("Johnny","Bravo");
-            Assert.assertEquals("Huge nose","Bravo");
+            Assert.assertEquals("Huge nose","Bravo",Victim);
         }
         @Test
         public void testUpdate () throws Exception
         {
-            Victim Victim = VictimFactory.getVictim("Huge nose","Bravo");
+            Victim victim = VictimFactory.getVictim("Huge nose","Bravo");
             Victim newVictim = new Victim
                     .Builder()
+                    .copy(victim)
                     .name("Huge Nose")
                     .surname("Bravo")
                     .build();

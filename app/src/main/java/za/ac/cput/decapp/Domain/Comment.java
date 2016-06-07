@@ -1,7 +1,6 @@
 package za.ac.cput.decapp.Domain;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * Created by User on 2016/04/24.
@@ -10,60 +9,62 @@ public class Comment implements Serializable
 {
     private Long id;
     private String info;
-    private Date date;
+    private String commentOfficial;
 
+    public Comment() {
+    }
 
     public Long getId() {
         return id;
     }
 
-   public String getInfo() {
+    public String getInfo() {
         return info;
     }
 
-    public Date getDate() {
-        return date;
-    }
-
-    public Comment() {
+    public String getCommentOfficial() {
+        return commentOfficial;
     }
 
     private Comment(Builder builder) {
-       this.id=builder.id;
-        this.info=builder.info;
-        this.date=builder.date;
+        id = builder.id;
+        info = builder.info;
+        commentOfficial = builder.commentOfficial;
     }
-
-    public static class Builder {
+    public static final class Builder {
+        public Long id;
         private String info;
-        private Date date;
-        private Long id;
+        private String commentOfficial;
 
         public Builder() {
         }
 
-        public Builder id(Long id) {
-            this.id = id;
+        public Builder id(Long val) {
+            id = val;
             return this;
         }
 
-        public Builder info(String info) {
-            this.info = info;
+        public Builder info(String val) {
+            info = val;
             return this;
         }
 
-        public Builder date(Date date) {
-            this.date = date;
+        public Builder commentOfficial(String val) {
+            commentOfficial = val;
             return this;
         }
-        public Builder(Comment copy) {
-            this.id = copy.id;
-            this.info = copy.info;
-            this.date = copy.date;
+
+        public Builder copy(Comment copy) {
+            Builder builder = new Builder();
+            builder.id = copy.id;
+            builder.info = copy.info;
+            builder.commentOfficial = copy.commentOfficial;
+            return this;
         }
+
+
         public Comment build() {
             return new Comment(this);
         }
-
     }
 }

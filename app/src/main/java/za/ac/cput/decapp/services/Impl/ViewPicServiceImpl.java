@@ -21,6 +21,10 @@ public class ViewPicServiceImpl extends IntentService implements LoginService{
             service = new TransferServiceImpl();
         return service;
     }
+    public ViewPicServiceImpl()
+    {
+
+    }
 
     private TransferServiceImpl() {
         super("TransferServiceImpl");

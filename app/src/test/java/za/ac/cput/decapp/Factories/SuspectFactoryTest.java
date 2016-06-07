@@ -1,7 +1,5 @@
 package za.ac.cput.decapp.Factories;
 
-import junit.framework.TestCase;
-
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -17,7 +15,7 @@ public class SuspectFactoryTest {
         public void testCreateSuspect() throws Exception {
 
             Suspect Suspect = SuspectFactory.getSuspect("Randall","Erasmus");
-            Assert.assertEquals("Randall","Erasmus");
+            Assert.assertEquals("Randall","Erasmus",Suspect);
         }
         @Test
         public void testUpdate () throws Exception
@@ -25,7 +23,7 @@ public class SuspectFactoryTest {
             Suspect Suspect = SuspectFactory.getSuspect("Randall","Erasmus");
             Suspect newSuspect = new Suspect
                     .Builder()
-//                .copy(Suspect)
+                    .copy(Suspect)
                     .name("Randall")
                     .surname("Erasmus")
                     .build();

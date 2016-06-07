@@ -19,6 +19,15 @@
         <activity android:name=".Wanted"/>
         <activity android:name=".SignUp"/>
         <activity android:name=".Comment"/>
-    </application>
+        <activity android:name=".Decapp"/>
+        <!--<service android:name="za.ac.cput.decapp.services.Impl.LawServiceImpl"/>-->
+        <!--<service android:name="za.ac.cput.decapp.services.Impl.LoginServiceImpl"/>-->
+        <!--<service android:name="za.ac.cput.decapp.services.Impl.RegisterServiceImpl"/>-->
+        <!--<service android:name="za.ac.cput.decapp.services.Impl.RemoveServiceImpl"/>-->
+        <!--<service android:name="za.ac.cput.decapp.services.Impl.SearchServiceImpl"/>-->
+        <!--<service android:name="za.ac.cput.decapp.services.Impl.UpdateServiceImpl"/>-->
+        <!--<service android:name="za.ac.cput.decapp.services.Impl.ViewPicServiceImpl"/>-->
+        <!--<service android:name="za.ac.cput.decapp.services.Impl.WantedServiceImpl"/>-->
+            </application>
 
 </manifest>

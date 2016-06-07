@@ -4,24 +4,24 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 
 import za.ac.cput.decapp.Conf.databases.DBConstants;
 import za.ac.cput.decapp.Domain.Suspect;
+import za.ac.cput.decapp.Repositories.Interfaces.SuspectRepository;
 
 /**
  * Created by User on 2016/05/04.
  */
-public class SuspectRepositoryImpl {
+public abstract class SuspectRepositoryImpl extends SQLiteOpenHelper implements SuspectRepository{
     public static final String TABLE_NAME = "Suspect";
     private SQLiteDatabase db;
 
     public static final String COLUMN_ID = "id";
-    public static final String COLUMN_SuspectID = "SuspectId";
     public static final String COLUMN_FIRSTNAME = "firstname";
     public static final String COLUMN_LASTNAME = "lastName";
 
@@ -29,7 +29,6 @@ public class SuspectRepositoryImpl {
     private static final String DATABASE_CREATE = " CREATE TABLE "
             + TABLE_NAME + "("
             + COLUMN_ID + " INTEGER  PRIMARY KEY AUTOINCREMENT, "
-            + COLUMN_SuspectID + " TEXT UNIQUE NOT NULL , "
             + COLUMN_FIRSTNAME + " TEXT NOT NULL , "
             + COLUMN_LASTNAME + " TEXT NOT NULL , ";
 
@@ -37,10 +36,6 @@ public class SuspectRepositoryImpl {
 
     public SuspectRepositoryImpl(Context context) {
         super(context, DBConstants.DATABASE_NAME, null, DBConstants.DATABASE_VERSION);
-    }
-
-    public void open() throws SQLException {
-        db = this.getWritableDatabase();
     }
 
     public void close() {
@@ -55,83 +50,79 @@ public class SuspectRepositoryImpl {
                 TABLE_NAME,
                 new String[]{
                         COLUMN_ID,
-                        COLUMN_SuspectID,
                         COLUMN_FIRSTNAME,
-                        COLUMN_LASTNAME,
-                        COLUMN_ID + " =? ",
+                        COLUMN_LASTNAME
+                },
+                COLUMN_ID + " =? ",
                 new String[]{String.valueOf(id)},
                 null,
                 null,
-                 null);
+                null);
         if (cursor.moveToFirst()) {
             final Suspect Suspect = new Suspect.Builder()
                     .id(cursor.getLong(cursor.getColumnIndex(COLUMN_ID)))
-                    .symbolImage(cursor.getBlob(cursor.getColumnIndex(COLUMN_SYMBOLIMAGE)))
-                    .firstname(cursor.getString(cursor.getColumnIndex(COLUMN_FIRSTNAME)))
-                    .lastName(cursor.getString(cursor.getColumnIndex(COLUMN_LASTNAME)))
+                    .name(cursor.getString(cursor.getColumnIndex(COLUMN_FIRSTNAME)))
+                    .surname(cursor.getString(cursor.getColumnIndex(COLUMN_LASTNAME)))
                     .build();
 
             return Suspect;
         } else {
             return null;
         }
-    }
-
+        }
     @Override
-    public Suspect save(Suspect entity) {
-        open();
+    public Suspect save(Suspect suspectEntity) {
+        db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(COLUMN_ID, entity.getId());
-        values.put(COLUMN_SuspectID, entity.getSuspectId());
-        values.put(COLUMN_FIRSTNAME, entity.getFirstname());
-        values.put(COLUMN_LASTNAME, entity.getLastName());
+        values.put(COLUMN_ID, suspectEntity.getId());
+        values.put(COLUMN_FIRSTNAME, suspectEntity.getName());
+        values.put(COLUMN_LASTNAME, suspectEntity.getSurname());
        long id = db.insertOrThrow(TABLE_NAME, null, values);
-        Suspect insertedEntity = new Suspect.Builder()
-                .copy(entity)
+        Suspect suspectInserted = new Suspect.Builder()
+                .copy(suspectEntity)
                 .id(new Long(id))
                 .build();
-        return insertedEntity;
+        return suspectInserted;
     }
 
     @Override
-    public Suspect update(Suspect entity) {
-        open();
+    public Suspect update(Suspect suspectEntity) {
+        db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(COLUMN_ID, entity.getId());
-        values.put(COLUMN_SuspectID, entity.getSuspectId());
-        values.put(COLUMN_FIRSTNAME, entity.getFirstname());
-        values.put(COLUMN_LASTNAME, entity.getLastName());
+        values.put(COLUMN_ID, suspectEntity.getId());
+        values.put(COLUMN_FIRSTNAME, suspectEntity.getName());
+        values.put(COLUMN_LASTNAME, suspectEntity.getSurname());
               db.update(
                 TABLE_NAME,
                 values,
                 COLUMN_ID + " =? ",
-                new String[]{String.valueOf(entity.getId())}
+                new String[]{String.valueOf(suspectEntity.getId())}
         );
-        return entity;
+        return suspectEntity;
     }
 
     @Override
-    public Suspect delete(Suspect entity) {
-        open();
+    public Suspect delete(Suspect suspectEntity) {
+        db = this.getWritableDatabase();
         db.delete(
                 TABLE_NAME,
                 COLUMN_ID + " =? ",
-                new String[]{String.valueOf(entity.getId())});
-        return entity;
+                new String[]{String.valueOf(suspectEntity.getId())});
+        return suspectEntity;
     }
 
     @Override
     public Set<Suspect> findAll() {
         SQLiteDatabase db = this.getReadableDatabase();
         Set<Suspect> Suspects = new HashSet<>();
-        open();
+        db = this.getWritableDatabase();
         Cursor cursor = db.query(TABLE_NAME, null,null,null,null,null,null);
         if (cursor.moveToFirst()) {
             do {
                 final Suspect Suspect = new Suspect.Builder()
                         .id(cursor.getLong(cursor.getColumnIndex(COLUMN_ID)))
-                        .firstname(cursor.getString(cursor.getColumnIndex(COLUMN_FIRSTNAME)))
-                        .lastName(cursor.getString(cursor.getColumnIndex(COLUMN_LASTNAME)))
+                        .name(cursor.getString(cursor.getColumnIndex(COLUMN_FIRSTNAME)))
+                        .surname(cursor.getString(cursor.getColumnIndex(COLUMN_LASTNAME)))
                          .build();
                 Suspects.add(Suspect);
             } while (cursor.moveToNext());
@@ -141,7 +132,7 @@ public class SuspectRepositoryImpl {
 
     @Override
     public int deleteAll() {
-        open();
+        db = this.getWritableDatabase();
         int rowsDeleted = db.delete(TABLE_NAME,null,null);
         close();
         return rowsDeleted;
@@ -163,4 +154,4 @@ public class SuspectRepositoryImpl {
     }
 }
 
-}
+

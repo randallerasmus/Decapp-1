@@ -8,6 +8,9 @@ import java.io.Serializable;
 public class User implements Serializable
 {
     private Long id;
+    private String username;
+    private String password;
+    private String authorizationNumber;
 
 
 
@@ -15,114 +18,68 @@ public class User implements Serializable
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    private String screenName;
-    private String email;
-    private String password;
-    private String obNumber;
-
-    public static Builder newUser() {
-        return new Builder();
-    }
-
-    public String getScreenName() {
-        return screenName;
-    }
-
-    public void setScreenName(String screenName) {
-        this.screenName = screenName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public String getUsername() {
+        return username;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getobNumber() {
-        return obNumber;
-    }
-
-    public void setobNumber(String obNumber) {
-        obNumber = obNumber;
+    public String getAuthorizationNumber() {
+        return authorizationNumber;
     }
 
     public User() {
-
     }
-
     private User(Builder builder) {
-        setId(builder.id);
-        setScreenName(builder.screenName);
-        setEmail(builder.email);
-        setPassword(builder.password);
-        setobNumber(builder.obNumber);
+        id = builder.id;
+        username = builder.username;
+        password = builder.password;
+        authorizationNumber = builder.authorizationNumber;
     }
 
-    public static class Builder {
+
+
+    public static final class Builder {
         private Long id;
-        private String screenName;
-        private String email;
+        private String username;
         private String password;
-        private String obNumber;
-
-
-        public Builder(String screenName) {
-            this.screenName = screenName;
-        }
+        private String authorizationNumber;
 
         public Builder() {
         }
 
-        public Builder(User copy) {
-            this.id = copy.id;
-            this.screenName = copy.screenName;
-            this.email = copy.email;
-            this.password = copy.password;
-            this.obNumber = copy.obNumber;
-        }
-
-        public Builder email(String email) {
-            this.email = email;
+        public Builder id(Long val) {
+            id = val;
             return this;
         }
 
-        public Builder password(String password) {
-            this.password = password;
+        public Builder username(String val) {
+            username = val;
             return this;
         }
 
-        public Builder obNumber(String obNumber) {
-            this.obNumber = obNumber;
+        public Builder password(String val) {
+            password = val;
             return this;
         }
 
-        public Builder id(Long id) {
-            this.id = id;
+        public Builder authorizationNumber(String val) {
+            authorizationNumber = val;
             return this;
         }
-
-        public Builder screenName(String val) {
-            screenName = val;
+        public Builder copy(User copy) {
+            Builder builder = new Builder();
+            builder.id = copy.id;
+            builder.username = copy.username;
+            builder.password = copy.password;
+            builder.authorizationNumber = copy.authorizationNumber;
             return this;
         }
 
         public User build() {
             return new User(this);
         }
-
     }
 }

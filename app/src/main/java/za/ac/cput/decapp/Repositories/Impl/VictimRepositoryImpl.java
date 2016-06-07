@@ -4,6 +4,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.sql.SQLException;
 import java.util.HashSet;
@@ -11,16 +13,16 @@ import java.util.Set;
 
 import za.ac.cput.decapp.Conf.databases.DBConstants;
 import za.ac.cput.decapp.Domain.Victim;
+import za.ac.cput.decapp.Repositories.Interfaces.VictimRepository;
 
 /**
  * Created by User on 2016/05/04.
  */
-public class VictimRepositoryImpl {
+public abstract class VictimRepositoryImpl extends SQLiteOpenHelper implements VictimRepository{
     public static final String TABLE_NAME = "Victim";
     private SQLiteDatabase db;
 
     public static final String COLUMN_ID = "id";
-    public static final String COLUMN_VictimID = "VictimId";
     public static final String COLUMN_FIRSTNAME = "firstname";
     public static final String COLUMN_LASTNAME = "lastName";
 
@@ -28,7 +30,6 @@ public class VictimRepositoryImpl {
     private static final String DATABASE_CREATE = " CREATE TABLE "
             + TABLE_NAME + "("
             + COLUMN_ID + " INTEGER  PRIMARY KEY AUTOINCREMENT, "
-            + COLUMN_VictimID + " TEXT UNIQUE NOT NULL , "
             + COLUMN_FIRSTNAME + " TEXT NOT NULL , "
             + COLUMN_LASTNAME + " TEXT NOT NULL , ";
 
@@ -54,9 +55,9 @@ public class VictimRepositoryImpl {
                 TABLE_NAME,
                 new String[]{
                         COLUMN_ID,
-                        COLUMN_VictimID,
                         COLUMN_FIRSTNAME,
                         COLUMN_LASTNAME,
+                },
                          COLUMN_ID + " =? ",
                 new String[]{String.valueOf(id)},
                 null,
@@ -66,9 +67,8 @@ public class VictimRepositoryImpl {
         if (cursor.moveToFirst()) {
             final Victim Victim = new Victim.Builder()
                     .id(cursor.getLong(cursor.getColumnIndex(COLUMN_ID)))
-                    .firstname(cursor.getString(cursor.getColumnIndex(COLUMN_FIRSTNAME)))
-                    .lastName(cursor.getString(cursor.getColumnIndex(COLUMN_LASTNAME)))
-                    .VictimId(cursor.getString(cursor.getColumnIndex(COLUMN_VictimID)))
+                    .name(cursor.getString(cursor.getColumnIndex(COLUMN_FIRSTNAME)))
+                    .surname(cursor.getString(cursor.getColumnIndex(COLUMN_LASTNAME)))
                     .build();
 
             return Victim;
@@ -78,41 +78,39 @@ public class VictimRepositoryImpl {
     }
 
     @Override
-    public Victim save(Victim entity) {
-        open();
+    public Victim save(Victim victimEntity) {
+        db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(COLUMN_ID, entity.getId());
-        values.put(COLUMN_VictimID, entity.getVictimId());
-        values.put(COLUMN_FIRSTNAME, entity.getFirstname());
-        values.put(COLUMN_LASTNAME, entity.getLastName());
+        values.put(COLUMN_ID, victimEntity.getId());
+       values.put(COLUMN_FIRSTNAME, victimEntity.getName());
+        values.put(COLUMN_LASTNAME, victimEntity.getSurname());
         long id = db.insertOrThrow(TABLE_NAME, null, values);
-        Victim insertedEntity = new Victim.Builder()
-                .copy(entity)
+        Victim insertedVictimEntity = new Victim.Builder()
+                .copy(victimEntity)
                 .id(new Long(id))
                 .build();
-        return insertedEntity;
+        return insertedVictimEntity;
     }
 
     @Override
-    public Victim update(Victim entity) {
-        open();
+    public Victim update(Victim victimEntity) {
+        db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(COLUMN_ID, entity.getId());
-        values.put(COLUMN_VictimID, entity.getVictimId());
-        values.put(COLUMN_FIRSTNAME, entity.getFirstname());
-        values.put(COLUMN_LASTNAME, entity.getLastName());
+        values.put(COLUMN_ID, victimEntity.getId());
+        values.put(COLUMN_FIRSTNAME, victimEntity.getName());
+        values.put(COLUMN_LASTNAME, victimEntity.getSurname());
         db.update(
                 TABLE_NAME,
                 values,
                 COLUMN_ID + " =? ",
-                new String[]{String.valueOf(entity.getId())}
+                new String[]{String.valueOf(victimEntity.getId())}
         );
-        return entity;
+        return victimEntity;
     }
 
     @Override
     public Victim delete(Victim entity) {
-        open();
+        db = this.getWritableDatabase();
         db.delete(
                 TABLE_NAME,
                 COLUMN_ID + " =? ",
@@ -124,15 +122,14 @@ public class VictimRepositoryImpl {
     public Set<Victim> findAll() {
         SQLiteDatabase db = this.getReadableDatabase();
         Set<Victim> Victims = new HashSet<>();
-        open();
+        db = this.getWritableDatabase();
         Cursor cursor = db.query(TABLE_NAME, null,null,null,null,null,null);
         if (cursor.moveToFirst()) {
             do {
                 final Victim Victim = new Victim.Builder()
                         .id(cursor.getLong(cursor.getColumnIndex(COLUMN_ID)))
-                        .firstname(cursor.getString(cursor.getColumnIndex(COLUMN_FIRSTNAME)))
-                        .lastName(cursor.getString(cursor.getColumnIndex(COLUMN_LASTNAME)))
-                        .VictimId(cursor.getString(cursor.getColumnIndex(COLUMN_VictimID)))
+                        .name(cursor.getString(cursor.getColumnIndex(COLUMN_FIRSTNAME)))
+                        .surname(cursor.getString(cursor.getColumnIndex(COLUMN_LASTNAME)))
                         .build();
                 Victims.add(Victim);
             } while (cursor.moveToNext());
@@ -142,7 +139,7 @@ public class VictimRepositoryImpl {
 
     @Override
     public int deleteAll() {
-        open();
+        db = this.getWritableDatabase();
         int rowsDeleted = db.delete(TABLE_NAME,null,null);
         close();
         return rowsDeleted;
@@ -164,4 +161,4 @@ public class VictimRepositoryImpl {
     }
 }
 
-}
+

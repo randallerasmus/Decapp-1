@@ -14,20 +14,23 @@ public class AddressFactoryTest
    @Test
     public void testCreate ()throws Exception
    {
-       Address address = AddressFactory.getAddress("pinetree","7100");
-       Assert.assertEquals("pinetree","7100");
+       Address address = AddressFactory.getAddress("pinetree","Khayelitsha","7100");
+       Assert.assertEquals("pinetree","7100",address);
    }
 
     @Test
     public void testUpdate()throws Exception
     {
-        Address Address = AddressFactory.getAddress("pinetree","7100");
+        Address address = AddressFactory.getAddress("pinetree","Khayelitsha","7100");
         Address newAddress = new Address
                 .Builder()
-                .copy(Address)
+                .copy(address)
                 .address("pinetree")
+                .suburb("Khayelitsha")
+                .postalCode("7100")
                 .build();
         Assert.assertEquals("pinetree",newAddress.getAddress());
+        Assert.assertEquals("Khayelitsha",newAddress.getSuburb());
         Assert.assertEquals("7100",newAddress.getPostalCode());
     }
 }

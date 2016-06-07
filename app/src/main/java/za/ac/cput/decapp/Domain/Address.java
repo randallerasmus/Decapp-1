@@ -1,82 +1,67 @@
 package za.ac.cput.decapp.Domain;
 
-/**
- * Created by User on 2016/04/24.
- */
-
 import java.io.Serializable;
 
+/**
+ * Created by User on 2016/06/06.
+ */
+public class Address implements Serializable {
 
-public class Address implements Serializable{
-
-    private Long id;
     private String address;
+    private String suburb;
     private String postalCode;
 
-    public Long getId() {
-        return id;
+    private Address() {
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public String getAddress()
-    {
+     public String getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public String getSuburb() {
+        return suburb;
     }
 
     public String getPostalCode() {
         return postalCode;
     }
 
-    public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
-    }
-
-    public Address() {
-    }
     private Address(Builder builder) {
-       this.id=builder.id;
-        this.address=builder.address;
-       this.postalCode=builder.postalCode;
+        address = builder.address;
+        suburb = builder.suburb;
+        postalCode = builder.postalCode;
     }
 
-    public static class Builder {
-        private Long id;
+       public static class Builder {
         private String address;
+        private String suburb;
         private String postalCode;
 
-        public Builder id(Long val) {
-            id = val;
+        public Builder address(String val) {
+            address = val;
             return this;
         }
 
-        public Builder address(String address) {
-            this.address = address;
+        public Builder suburb(String val) {
+            suburb = val;
             return this;
         }
 
-        public Builder postalCode(String postalCode) {
-            this.postalCode = postalCode;
-            return this;
-
-        }
-
-        public Builder copy(Address address) {
-           this.id=address.id;
-            this.address=address.address;
-            this.postalCode=address.postalCode;
-
+        public Builder postalCode(String val) {
+            postalCode = val;
             return this;
         }
-        public Address build()
-        {
+
+        public Builder copy(Address copy) {
+            Builder builder = new Builder();
+            builder.address = copy.address;
+            builder.suburb = copy.suburb;
+            builder.postalCode = copy.postalCode;
+            return builder;
+        }
+
+        public Address build() {
             return new Address(this);
         }
-
     }
 }

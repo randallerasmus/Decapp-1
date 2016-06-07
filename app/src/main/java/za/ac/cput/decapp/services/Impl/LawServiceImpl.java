@@ -15,8 +15,8 @@ import za.ac.cput.decapp.services.LawService;
  */
 //this service is used for the quick review of the Law for the office
     // this is bound services because it must wait for the return of the request
-public class LawServiceImpl extends Service implements LawService{
-    
+public abstract class LawServiceImpl extends Service implements LawService{
+
     private final IBinder localBinder = new ActivateServiceLocalBinder();
 
     private CommentRepository repo;
@@ -26,7 +26,7 @@ public class LawServiceImpl extends Service implements LawService{
 
     @Override
     public IBinder onBind(Intent intent) {
-        // TODO: Return the communication channel to the service.
+
         return localBinder;
     }
 

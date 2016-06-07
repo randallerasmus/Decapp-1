@@ -53,6 +53,12 @@ import java.io.Serializable;
             public Builder() {
             }
 
+            public Builder copy(Suspect copy) {
+                this.id = copy.id;
+                this.name = copy.name;
+                this.surname = copy.surname;
+                return this;
+            }
 
 
             public Builder Id(Long id) {
@@ -75,7 +81,11 @@ import java.io.Serializable;
                 return new Suspect(this);
             }
 
+            public Builder id(Long val) {
+                id = val;
+                return this;
             }
+        }
 
         public Suspect build()
         {

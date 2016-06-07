@@ -21,6 +21,10 @@ public class RemoveServiceImpl extends IntentService implements LoginService {
             service = new SuspectServiceImpl();
         return service;
     }
+    public RegisterServiceImpl()
+    {
+
+    }
 
     private SuspectServiceImpl() {
         super("SuspectServiceImpl");

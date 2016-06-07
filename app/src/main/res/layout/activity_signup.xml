@@ -13,100 +13,90 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Sign Up"
-            android:id="@+id/textView6"
+            android:id="@+id/txtSignup"
+            android:textSize="30sp"
+            android:layout_marginTop="53dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="42dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Please complete below "
-            android:id="@+id/textView9"
-            android:layout_marginTop="58dp"
-            android:layout_below="@+id/textView6"
-            android:layout_centerHorizontal="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Username :"
-            android:id="@+id/textView10"
-            android:layout_marginTop="33dp"
-            android:layout_below="@+id/textView9"
-            android:layout_toLeftOf="@+id/textView9"
-            android:layout_toStartOf="@+id/textView9" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Password :"
-            android:id="@+id/textView11"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/textView9"
-            android:layout_toStartOf="@+id/textView9" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Email         :"
-            android:id="@+id/textView12"
-            android:layout_marginTop="28dp"
-            android:layout_below="@+id/textView11"
-            android:layout_alignLeft="@+id/textView11"
-            android:layout_alignStart="@+id/textView11" />
+           />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sign up"
-            android:id="@+id/button4"
-            android:layout_below="@+id/textView12"
-            android:layout_toLeftOf="@+id/textView6"
-            android:layout_toStartOf="@+id/textView6"
-            android:layout_marginTop="57dp" />
+            android:id="@+id/btnSignUp"
+            android:layout_above="@+id/button5"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:onClick="onSignUpClick" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Cancel"
             android:id="@+id/button5"
-            android:layout_alignTop="@+id/button4"
-            android:layout_alignLeft="@+id/textView6"
-            android:layout_alignStart="@+id/textView6"
-            android:layout_marginLeft="47dp"
-            android:layout_marginStart="47dp" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/editText7"
-            android:layout_alignBottom="@+id/textView10"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignLeft="@+id/textView9"
-            android:layout_alignStart="@+id/textView9" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/editText8"
-            android:layout_above="@+id/textView12"
-            android:layout_toRightOf="@+id/textView11"
+            android:layout_marginBottom="43dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/editText9"
-            android:layout_alignBottom="@+id/textView12"
-            android:layout_toRightOf="@+id/textView11"
+            android:id="@+id/editTx_name"
+            android:hint="Enter Username"
+            android:layout_above="@+id/editTxt_pass1"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/editTxt_pass2"
+            android:hint="Confirm Password"
+            android:layout_above="@+id/editTxt_email"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/editTxt_email"
+            android:hint="Enter Email"
+            android:layout_above="@+id/btnSignUp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/editTxt_pass1"
+            android:hint="Choose Password"
+            android:layout_above="@+id/editTxt_pass2"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Please enter Below"
+            android:id="@+id/textView"
+            android:layout_below="@+id/txtSignup"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="53dp" />
+
     </RelativeLayout>
 </LinearLayout>

@@ -4,18 +4,20 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
-import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 
 import za.ac.cput.decapp.Conf.databases.DBConstants;
 import za.ac.cput.decapp.Domain.Transfer;
+import za.ac.cput.decapp.Repositories.Interfaces.TransferRepository;
 
 /**
  * Created by User on 2016/05/04.
  */
-public class TransferRepositoryImpl {
+public abstract class TransferRepositoryImpl extends SQLiteOpenHelper implements TransferRepository{
     public static final String TABLE_NAME = "Transfer";
     private SQLiteDatabase db;
 
@@ -37,7 +39,7 @@ public class TransferRepositoryImpl {
         super(context, DBConstants.DATABASE_NAME, null, DBConstants.DATABASE_VERSION);
     }
 
-    public void open() throws SQLException {
+    public void open() {
         db = this.getWritableDatabase();
     }
 
@@ -53,8 +55,9 @@ public class TransferRepositoryImpl {
                 TABLE_NAME,
                 new String[]{
                         COLUMN_ID,
-                        COLUMN_TransferID,
                         COLUMN_TransferIMAGE,
+                        COLUMN_TransferID
+                },
                         COLUMN_ID + " =? ",
                 new String[]{String.valueOf(id)},
                 null,
@@ -64,7 +67,7 @@ public class TransferRepositoryImpl {
         if (cursor.moveToFirst()) {
             final Transfer Transfer = new Transfer.Builder()
                     .id(cursor.getLong(cursor.getColumnIndex(COLUMN_ID)))
-                    .TransferImage(cursor.getBlob(cursor.getColumnIndex(COLUMN_TransferIMAGE)))
+                    .suspectImage(cursor.getBlob(cursor.getColumnIndex(COLUMN_TransferIMAGE)))
                     .TransferId(cursor.getString(cursor.getColumnIndex(COLUMN_TransferID)))
                     .build();
 
@@ -80,7 +83,7 @@ public class TransferRepositoryImpl {
         ContentValues values = new ContentValues();
         values.put(COLUMN_ID, entity.getId());
         values.put(COLUMN_TransferID, entity.getTransferId());
-       values.put(COLUMN_TransferIMAGE, entity.getTransferImage());
+       values.put(COLUMN_TransferIMAGE, entity.getsuspectImage());
         long id = db.insertOrThrow(TABLE_NAME, null, values);
         Transfer insertedEntity = new Transfer.Builder()
                 .copy(entity)
@@ -95,7 +98,7 @@ public class TransferRepositoryImpl {
         ContentValues values = new ContentValues();
         values.put(COLUMN_ID, entity.getId());
         values.put(COLUMN_TransferID, entity.getTransferId());
-        values.put(COLUMN_TransferIMAGE, entity.getTransferImage());
+        values.put(COLUMN_TransferIMAGE, entity.getsuspectImage());
         db.update(
                 TABLE_NAME,
                 values,
@@ -125,7 +128,7 @@ public class TransferRepositoryImpl {
             do {
                 final Transfer Transfer = new Transfer.Builder()
                         .id(cursor.getLong(cursor.getColumnIndex(COLUMN_ID)))
-                        .TransferImage(cursor.getBlob(cursor.getColumnIndex(COLUMN_TransferIMAGE)))
+                        .suspectImage(cursor.getBlob(cursor.getColumnIndex(COLUMN_TransferIMAGE)))
                         .TransferId(cursor.getString(cursor.getColumnIndex(COLUMN_TransferID)))
                         .build();
                 Transfers.add(Transfer);
@@ -158,4 +161,4 @@ public class TransferRepositoryImpl {
     }
 }
 
-}
+

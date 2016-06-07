@@ -1,11 +1,7 @@
 package za.ac.cput.decapp.Factories;
 
-import junit.framework.TestCase;
-
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.Date;
 
 import za.ac.cput.decapp.Domain.Contact;
 
@@ -18,7 +14,7 @@ public class ContactFactoryTest  {
         public void testCreateContact() throws Exception {
 
             Contact Contact = ContactFactory.getContact("0813355742","0219041958");
-            Assert.assertEquals("0813355278","0219021452");
+            Assert.assertEquals("0813355278","0219021452",Contact);
         }
         @Test
         public void testUpdate () throws Exception
@@ -26,6 +22,7 @@ public class ContactFactoryTest  {
             Contact contact = ContactFactory.getContact("111111111","111111111");
             Contact newContact = new Contact
                     .Builder()
+                    .copy(contact)
                     .cellphone("02134567")
                     .phoneNumber("021345698")
                     .build();

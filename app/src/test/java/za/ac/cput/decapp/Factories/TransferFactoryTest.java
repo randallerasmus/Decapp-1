@@ -20,14 +20,15 @@ public class TransferFactoryTest  {
         public void testCreateTransfer() throws Exception {
 
             Transfer Transfer = TransferFactory.getTransfer(Pic.jpeg,new Date(8-12-2016));
-            Assert.assertEquals(Pic.jpeg,new Date(8-12-2016));
+            Assert.assertEquals(Pic.jpeg,new Date(8-12-2016),Transfer);
         }
         @Test
         public void testUpdate () throws Exception
         {
-            Transfer Transfer = TransferFactory.getTransfer(Pic.jpeg,new Date(8-12-2016));
+            Transfer transfer = TransferFactory.getTransfer(Pic.jpeg,new Date(8-12-2016));
             Transfer newTransfer = new Transfer
                     .Builder()
+                    .copy(transfer)
                     .pic(Pic.jpeg)
                     .date(new Date(8-12-2016))
                     .build();

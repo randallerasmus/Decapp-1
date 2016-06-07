@@ -10,7 +10,8 @@ public class ContactFactory {
     public static Contact getContact(String cellphone, String phoneNumber)
     {
         Contact contct = new Contact
-                .Builder(cellphone)
+                .Builder()
+                .cellphone(cellphone)
                 .phoneNumber(phoneNumber)
                 .build();
 
