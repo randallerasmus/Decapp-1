@@ -9,7 +9,7 @@ import za.ac.cput.decapp.Domain.Comment;
 /**
  * Created by User on 2016/05/05.
  */
-public class CommentFactoryTest {
+public class UpdateActivityFactoryTest {
 
     @Test
     public void testCreateComment() throws Exception {

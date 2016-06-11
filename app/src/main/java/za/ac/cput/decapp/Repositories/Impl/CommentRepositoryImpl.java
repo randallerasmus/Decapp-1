@@ -21,7 +21,7 @@ import za.ac.cput.decapp.Repositories.Interfaces.CommentRepository;
 // this is like my database helper class
 public abstract class  CommentRepositoryImpl extends SQLiteOpenHelper implements CommentRepository
 {
-    public static final String TABLE_NAME = "Comment";
+    public static final String TABLE_NAME = "UpdateActivity";
     private SQLiteDatabase db;
 
     public static final String COLUMN_ID = "id";

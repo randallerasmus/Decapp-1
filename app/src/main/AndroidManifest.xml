@@ -15,11 +15,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".caseActivity" />
-        <activity android:name=".Wanted"/>
-        <activity android:name=".SignUp"/>
-        <activity android:name=".Comment"/>
-        <activity android:name=".Decapp"/>
+        <activity android:name=".CaseActivity" />
+        <activity android:name=".WantedActivity"/>
+        <activity android:name=".SignUpActivity"/>
+        <activity android:name=".UpdateActivity"/>
+        <activity android:name=".DecappActivity"/>
+        <activity android:name=".RemoveActivity"/>
         <!--<service android:name="za.ac.cput.decapp.services.Impl.LawServiceImpl"/>-->
         <!--<service android:name="za.ac.cput.decapp.services.Impl.LoginServiceImpl"/>-->
         <!--<service android:name="za.ac.cput.decapp.services.Impl.RegisterServiceImpl"/>-->

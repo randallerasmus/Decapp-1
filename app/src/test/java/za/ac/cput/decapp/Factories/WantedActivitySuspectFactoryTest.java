@@ -9,7 +9,7 @@ import za.ac.cput.decapp.Domain.WantedSuspects;
 /**
  * Created by User on 2016/05/05.
  */
-public class WantedSuspectFactoryTest {
+public class WantedActivitySuspectFactoryTest {
 
         @Test
         public void testCreateWantedSuspect() throws Exception {

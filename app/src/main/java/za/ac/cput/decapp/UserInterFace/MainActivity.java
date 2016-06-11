@@ -18,12 +18,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //type casting to buttons for Actionlisteners
         Button btnSignUp =(Button)findViewById(R.id.btnSignUp);
-       Button btnCancel = (Button)findViewById(R.id.btnCancel);
+       Button btnCancelMain = (Button)findViewById(R.id.btnCancel);
         Button btnLogin = (Button)findViewById(R.id.btnLogin);
 
         //this also works like a charm
         btnSignUp.setOnClickListener(this);
-        btnCancel.setOnClickListener(this);
+        btnCancelMain.setOnClickListener(this);
         btnLogin.setOnClickListener(this);
     }
 
@@ -33,14 +33,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId())
         {
             case R.id.btnSignUp:
-                Intent signUpIntent = new Intent(MainActivity.this,SignUp.class);
+                Intent signUpIntent = new Intent(MainActivity.this,SignUpActivity.class);
                 startActivity(signUpIntent);
 
             case R.id.btnCancel:
                 System.exit(0);
 
             case R.id.btnLogin:
-                Intent decappIntent = new Intent(MainActivity.this,Decapp.class);
+                Intent decappIntent = new Intent(MainActivity.this,DecappActivity.class);
                 startActivity(decappIntent);
         }
 

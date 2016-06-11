@@ -4,14 +4,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 /**
- * Created by User on 2016/05/12.
+ * Created by User on 2016/06/11.
  */
-public class Comment extends AppCompatActivity
-{
+public class RemoveActivity extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_comment);
+        setContentView(R.layout.activity_remove);
     }
 }

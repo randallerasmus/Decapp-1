@@ -14,7 +14,8 @@ public class TransferFactory {
     public static Transfer getTransfer (Blob pic, Date date
                                            ) {
         Transfer trnsfer = new Transfer
-                .Builder(pic)
+                .Builder()
+//                .suspectImage()
                 .date(date)
                 .build();
 

@@ -10,7 +10,7 @@ import android.widget.EditText;
 
 import za.ac.cput.decapp.Repositories.Impl.CaseRepositoryImpl;
 
-public class caseActivity extends AppCompatActivity {
+public class CaseActivity extends AppCompatActivity {
 
     CaseRepositoryImpl myDb;
     EditText editOffenses,editTextLocation,editId;
@@ -40,9 +40,9 @@ public class caseActivity extends AppCompatActivity {
             String offenses = editOffenses.getText().toString();
             String offenseLocation = editTextLocation.getText().toString();
 
-           caseRepositoryimpl = new CaseRepositoryImpl(context);
-            caseRepositoryimpl.open();
-            caseRepositoryimpl.insertData(ids,offenses,offenseLocation);
+//           caseRepositoryimpl = new CaseRepositoryImpl(context);
+//            caseRepositoryimpl.open();
+//            caseRepositoryimpl.insertData(ids,offenses,offenseLocation);
 
 
         }

@@ -1,7 +1,7 @@
 package za.ac.cput.decapp.UserInterFace;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
@@ -11,11 +11,11 @@ import android.widget.Toast;
 /**
  * Created by User on 2016/05/12.
  */
-public class SignUp extends AppCompatActivity
+public class SignUpActivity extends AppCompatActivity
 {
     @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
     }
     public void onSignUpClick(View v)
@@ -37,8 +37,14 @@ public class SignUp extends AppCompatActivity
             if (!pass1str.equals(pass2str))
             {
                 // this test to
-                Toast pass = Toast.makeText(SignUp.this,"Passwords Dont Match",Toast.LENGTH_SHORT);
+                Toast pass = Toast.makeText(SignUpActivity.this,"Passwords Dont Match",Toast.LENGTH_SHORT);
                 pass.show();
+            } else if(pass1str.equals(pass2str))
+            {
+                Toast pass = Toast.makeText(SignUpActivity.this,"SignUpActivity Successfull",Toast.LENGTH_SHORT);
+                pass.show();
+                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                startActivity(intent);
             }
         }
     }
