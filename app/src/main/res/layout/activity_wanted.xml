@@ -13,11 +13,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Wanted Area"
+        android:text="Suspects"
         android:id="@+id/textView3"
-        android:layout_marginTop="42dp"
         android:layout_below="@+id/imageView"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textSize="30dp" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -42,33 +42,13 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Suspect Details"
-        android:id="@+id/btnSuspectDetails"
-        android:layout_marginTop="97dp"
-        android:layout_below="@+id/imageView2"
-        android:onClick="onUploadSuspectButtonClick"
-        android:layout_toRightOf="@+id/imageView2"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="Back"
         android:id="@+id/btnBack"
-        android:layout_below="@+id/btnSuspectDetails"
+        android:onClick="onBtnBackClick"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cancel"
-        android:id="@+id/btnCancel"
-        android:layout_below="@+id/btnBack"
-        android:layout_toRightOf="@+id/imageView2"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
 </RelativeLayout>

@@ -15,52 +15,51 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Case Information"
         android:id="@+id/txtViewCaseInfo"
+        android:textSize="30sp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="51dp"
-        android:textSize="30sp" />
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add Case "
         android:id="@+id/btnAddCase"
-        android:layout_marginBottom="153dp"
-        android:layout_alignParentBottom="true"
+        android:onClick="onAddCaseButtonClick"
+        android:layout_above="@+id/btnBack"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:onClick="onAddCaseButtonClick" />
+        android:layout_alignParentEnd="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/editOffense"
-        android:layout_below="@+id/txtViewCaseInfo"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="72dp"
+        android:hint="Offense"
+        android:layout_above="@+id/editOffenseLocation"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:hint="Offense" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/editOffenseLocation"
-        android:layout_below="@+id/editOffense"
+        android:hint="Offense location"
+        android:layout_above="@+id/btnAddCase"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="88dp"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/editOffense"
-        android:layout_alignEnd="@+id/editOffense"
-        android:hint="Offense location" />
+        android:layout_alignParentStart="true" />
 
-    <EditText
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editIdNo"
-        android:layout_below="@+id/editOffenseLocation"
+        android:text="Back"
+        android:id="@+id/btnBack"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/btnAddCase"

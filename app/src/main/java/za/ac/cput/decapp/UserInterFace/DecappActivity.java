@@ -132,6 +132,14 @@ public class DecappActivity extends AppCompatActivity {
                     });
             }
             }
+    public void onLawClick(View law)
+    {
+        if(law.getId()==R.id.btnLawUpdate)
+        {
+            Intent intent = new Intent(this,LawActivity.class);
+            startActivity(intent);
+        }
+    }
 }
 
 

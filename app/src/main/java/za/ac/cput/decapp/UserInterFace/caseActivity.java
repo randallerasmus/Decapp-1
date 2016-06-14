@@ -25,7 +25,7 @@ public class CaseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_case);
 //        myDb = new CaseRepositoryImpl(this);
 
-        editId = (EditText)findViewById(R.id.editIdNo);
+//        editId = (EditText)findViewById(R.id.editIdNo);
         editOffenses = (EditText) findViewById(R.id.editOffense);
         editTextLocation = (EditText) findViewById(R.id.editOffenseLocation);
         addCasebutton = (Button) findViewById(R.id.btnAddCase);

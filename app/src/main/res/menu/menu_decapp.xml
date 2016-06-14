@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/scanSuspects"
-        android:title="Scan Suspects"
+        android:title="View Suspects"
         />
     <item
         android:id="@+id/searchSuspects"
@@ -11,10 +11,10 @@
         />
     <item
         android:id="@+id/removeSuspects"
-        android:title="Remove Suspects"
+        android:title="Remove Suspects "
         />
     <item
         android:id="@+id/editSuspects"
-        android:title="Edit Suspects"
+        android:title="Update Suspect "
         />
 </menu>

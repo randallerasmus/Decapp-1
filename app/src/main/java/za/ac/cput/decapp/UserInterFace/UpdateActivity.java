@@ -18,12 +18,10 @@ public class UpdateActivity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_comment);
 
         Button btnUpdate =(Button)findViewById(R.id.btnUpdate);
-        Button btnCancelMain = (Button)findViewById(R.id.btnCancel);
         Button btnBack = (Button)findViewById(R.id.btnBack);
 
         //this also works like a charm
         btnUpdate.setOnClickListener(this);
-        btnCancelMain.setOnClickListener(this);
         btnBack.setOnClickListener(this);
     }
 
@@ -36,10 +34,7 @@ public class UpdateActivity extends AppCompatActivity implements View.OnClickLis
                 //here the service goes
                 startActivity(signUpIntent);
 
-            case R.id.btnCancel:
-                System.exit(1);
-
-            case R.id.btnBack:
+                case R.id.btnBack:
                 Intent decappIntent = new Intent(UpdateActivity.this,DecappActivity.class);
                 startActivity(decappIntent);
         }

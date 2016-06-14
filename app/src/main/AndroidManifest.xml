@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="za.ac.cput.decapp.UserInterFace">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -21,6 +23,8 @@
         <activity android:name=".UpdateActivity"/>
         <activity android:name=".DecappActivity"/>
         <activity android:name=".RemoveActivity"/>
+        <activity android:name=".LawActivity"
+            android:label="WebViewApp"/>
         <!--<service android:name="za.ac.cput.decapp.services.Impl.LawServiceImpl"/>-->
         <!--<service android:name="za.ac.cput.decapp.services.Impl.LoginServiceImpl"/>-->
         <!--<service android:name="za.ac.cput.decapp.services.Impl.RegisterServiceImpl"/>-->
