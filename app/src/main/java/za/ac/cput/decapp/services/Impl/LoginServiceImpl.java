@@ -1,6 +1,7 @@
 package za.ac.cput.decapp.services.Impl;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
@@ -22,45 +23,48 @@ import za.ac.cput.decapp.services.LoginService;
     // and can only used while on duty due to security constraints
     // this is a started service
 
-public abstract class LoginServiceImpl extends Service implements LoginService {
+public class LoginServiceImpl extends Service implements LoginService
+{
     final private UserRepository userRepository;
     private static LoginServiceImpl service = null;
+    private final IBinder localBinder = new LoginServiceBinder();//Binder bridge
 
-    public static LoginServiceImpl getInstance() {
+    public static LoginServiceImpl getInstance()
+    {
         if (service == null)
-            service = service;
+            service = new LoginServiceImpl();
         return service;
     }
 
-    public LoginServiceImpl() {
-        userRepository = new UserRepositoryImpl(App.getAppContext()) {
-        };
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
     }
 
-    private final IBinder localBinder = new LoginServiceBinder();
+    public LoginServiceImpl()
+    {
+        userRepository = new UserRepositoryImpl(App.getAppContext());
 
-    public class LoginServiceBinder extends Binder {
-        public LoginServiceImpl getService() {
+    }
+    public class LoginServiceBinder extends Binder
+    {
+        public LoginServiceImpl getService()
+        {
             return LoginServiceImpl.this;
         }
     }
 
     @Override
-    public IBinder onBind(Intent intent) {
-//         TODO: Return the communication channel to the service.
+    public IBinder onBind(Intent intent)
+    {
         return localBinder;
     }
 
-    public boolean checkActivition() {
-        Set<User> users = userRepository.findAll();
-        return users.size() > 0;
-    }
-
-    public boolean checkLogin(String username, String password) {
+   public boolean checkLogin(String password) {
         boolean loggedIn = false;
         Set<User> users = userRepository.findAll();
         for (User user : users) {
-            loggedIn = BCrypt.checkpw(password, user.getAuthorizationNumber());
+            loggedIn = BCrypt.checkpw(password, user.getPassword());
         }
         return loggedIn;
     }

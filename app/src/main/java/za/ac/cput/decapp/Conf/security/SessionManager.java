@@ -23,6 +23,7 @@ public class SessionManager {
     // Shared preferences file name
     private static final String PREF_NAME = "HashDroidLogin";
     private static final String KEY_IS_LOGGEDIN = "isLoggedIn";
+
     public SessionManager(Context context) {
         this.context = context;
         pref = this.context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);

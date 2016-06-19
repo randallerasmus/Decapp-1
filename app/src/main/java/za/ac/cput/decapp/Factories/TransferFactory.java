@@ -2,7 +2,6 @@ package za.ac.cput.decapp.Factories;
 
 
 
-import java.sql.Blob;
 import java.util.Date;
 
 import za.ac.cput.decapp.Domain.Transfer;
@@ -11,11 +10,11 @@ import za.ac.cput.decapp.Domain.Transfer;
  * Created by User on 2016/04/24.
  */
 public class TransferFactory {
-    public static Transfer getTransfer (Blob pic, Date date
+    public static Transfer getTransfer (byte [] image, Date date
                                            ) {
         Transfer trnsfer = new Transfer
                 .Builder()
-//                .suspectImage()
+                .suspectImage(image)
                 .date(date)
                 .build();
 

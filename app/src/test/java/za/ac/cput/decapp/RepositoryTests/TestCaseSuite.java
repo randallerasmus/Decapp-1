@@ -10,11 +10,11 @@ import org.junit.runners.Suite;
 // this is the test suite to create tests
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        CaseRepositoryTests.class,
-        CommentsRepositoryTest.class,
-        SuspectRepositoryTest.class,
-        TransferRepositoryTest.class,
-        VictimRepositoryTest.class,
+//        CaseRepositoryTests.class,
+//        CommentsRepositoryTest.class,
+//        SuspectRepositoryTest.class,
+//        TransferRepositoryTest.class,
+//        VictimRepositoryTest.class,
         UserRepositoryTest.class,
 
 })

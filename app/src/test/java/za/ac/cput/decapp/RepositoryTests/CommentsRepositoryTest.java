@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.util.Set;
 
+import za.ac.cput.decapp.Conf.util.App;
 import za.ac.cput.decapp.Domain.Comment;
 import za.ac.cput.decapp.Repositories.Impl.CommentRepositoryImpl;
 import za.ac.cput.decapp.Repositories.Interfaces.CommentRepository;
@@ -12,10 +13,10 @@ import za.ac.cput.decapp.Repositories.Interfaces.CommentRepository;
 public class CommentsRepositoryTest extends TestCaseSuite{
     private static final String TAG="COMMENTS TEST";
     private Long id;
-
+    CommentRepository repo = new CommentRepositoryImpl(App.getAppContext());
     @Test
     public void testCommentCRUD() throws Exception{
-        CommentRepository repo = new CommentRepositoryImpl(this,);
+
         Comment coments = new Comment.Builder()
                 .id(id)
                 .info("left rear scar")

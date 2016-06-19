@@ -13,11 +13,12 @@ import java.util.Set;
 import za.ac.cput.decapp.Conf.databases.DBConstants;
 import za.ac.cput.decapp.Domain.Case;
 import za.ac.cput.decapp.Repositories.Interfaces.CaseRepository;
+//import za.ac.cput.decapp.Repositories.Interfaces.CaseRepository;
 
 /**
  * Created by User on 2016/05/04.
  */
-public abstract class CaseRepositoryImpl extends SQLiteOpenHelper implements CaseRepository
+public class CaseRepositoryImpl extends SQLiteOpenHelper implements CaseRepository
 {
     public static final String TABLE_NAME = "Case";
     private SQLiteDatabase db;
@@ -82,7 +83,7 @@ public abstract class CaseRepositoryImpl extends SQLiteOpenHelper implements Cas
         values.put(COLUMN_ID,caseEntity.getId());
         values.put(COLUMN_OFFENSE,caseEntity.getOffense());
         values.put(COLUMN_OFFENSELOCATION,caseEntity.getOffenseLocation());
-        long id = db.insertOrThrow(TABLE_NAME, null, values);
+        long id = db.insert(TABLE_NAME, null, values);
         Case caseInserted = new Case.Builder()
                 .copy(caseEntity)
                 .id(new Long(id))
@@ -156,5 +157,19 @@ public abstract class CaseRepositoryImpl extends SQLiteOpenHelper implements Cas
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
 
+    }
+    @Override
+    public String getUserEntry(String username) {
+        Cursor cursor = db.query("User", null, " COLUMN_USERNAME=?", new String[]{username}, null, null, null);
+
+        if (cursor.getCount()<1)
+        {
+            cursor.close();
+            return "NOT EXIST";
+        }
+        cursor.moveToFirst();
+        String password = cursor.getString(cursor.getColumnIndex("PASSWORD"));
+        cursor.close();
+        return password;
     }
 }

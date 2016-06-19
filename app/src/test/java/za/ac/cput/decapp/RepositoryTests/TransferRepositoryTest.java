@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import java.util.Set;
 
-import za.ac.cput.decapp.Domain.Suspect;
+import za.ac.cput.decapp.Conf.util.App;
 import za.ac.cput.decapp.Domain.Transfer;
 import za.ac.cput.decapp.Repositories.Impl.TransferRepositoryImpl;
 import za.ac.cput.decapp.Repositories.Interfaces.TransferRepository;
@@ -18,13 +18,12 @@ public class TransferRepositoryTest extends AndroidTestCase {
 
     @Test
     public void testTransferCRUD() throws Exception{
-        TransferRepository repo = new TransferRepositoryImpl(this.getContext());
+        TransferRepository repo = new TransferRepositoryImpl(App.getAppContext());
 
         Transfer upload = new Transfer.Builder()
                 .id(id)
                 .TransferId("Jason")
-                .suspectImage(Suspect[])
-                 .build();
+                .build();
 
         Transfer insertedEntity = repo.save(upload);
         id = insertedEntity.getId();

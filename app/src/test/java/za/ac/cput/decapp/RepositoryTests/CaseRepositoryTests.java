@@ -1,5 +1,7 @@
 package za.ac.cput.decapp.RepositoryTests;
 
+import android.test.AndroidTestCase;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -9,13 +11,13 @@ import za.ac.cput.decapp.Domain.Case;
 import za.ac.cput.decapp.Repositories.Impl.CaseRepositoryImpl;
 import za.ac.cput.decapp.Repositories.Interfaces.CaseRepository;
 
-public class CaseRepositoryTests extends TestCaseSuite {
+public class CaseRepositoryTests extends AndroidTestCase {
     private static final String TAG="Case TEST";
     private Long id;
-
+    CaseRepository repo = new CaseRepositoryImpl(null);
     @Test
     public void testCaseCRUD() throws Exception{
-        CaseRepository repo = new CaseRepositoryImpl(this.toString()) {
+         {
         };
       Case aCase = new Case.Builder()
                 .id(id)

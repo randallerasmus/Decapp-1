@@ -30,7 +30,7 @@ public class UpdateActivity extends AppCompatActivity implements View.OnClickLis
         switch (v.getId())
         {
             case R.id.btnUpdate:
-                Intent signUpIntent = new Intent(UpdateActivity.this,CaseActivity.class);
+                Intent signUpIntent = new Intent(UpdateActivity.this,MainActivity.class);
                 //here the service goes
                 startActivity(signUpIntent);
 

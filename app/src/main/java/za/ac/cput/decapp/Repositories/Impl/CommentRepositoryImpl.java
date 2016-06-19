@@ -19,7 +19,7 @@ import za.ac.cput.decapp.Repositories.Interfaces.CommentRepository;
 // * Created by User on 2016/05/04.
 
 // this is like my database helper class
-public abstract class  CommentRepositoryImpl extends SQLiteOpenHelper implements CommentRepository
+public class CommentRepositoryImpl extends SQLiteOpenHelper implements CommentRepository
 {
     public static final String TABLE_NAME = "UpdateActivity";
     private SQLiteDatabase db;
@@ -160,6 +160,20 @@ public abstract class  CommentRepositoryImpl extends SQLiteOpenHelper implements
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
 
+    }
+    @Override
+    public String getUserEntry(String username) {
+        Cursor cursor = db.query("User", null, " COLUMN_USERNAME=?", new String[]{username}, null, null, null);
+
+        if (cursor.getCount()<1)
+        {
+            cursor.close();
+            return "NOT EXIST";
+        }
+        cursor.moveToFirst();
+        String password = cursor.getString(cursor.getColumnIndex("PASSWORD"));
+        cursor.close();
+        return password;
     }
 }
 

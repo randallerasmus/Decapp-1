@@ -1,12 +1,11 @@
 package za.ac.cput.decapp.RepositoryTests;
 
-import android.test.AndroidTestCase;
-
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Set;
 
+import za.ac.cput.decapp.Conf.util.App;
 import za.ac.cput.decapp.Domain.Suspect;
 import za.ac.cput.decapp.Repositories.Impl.SuspectRepositoryImpl;
 import za.ac.cput.decapp.Repositories.Interfaces.SuspectRepository;
@@ -17,8 +16,7 @@ public class SuspectRepositoryTest extends TestCaseSuite {
 
     @Test
     public void testSuspectCRUD() throws Exception{
-        SuspectRepository repo = new SuspectRepositoryImpl(this.getContext());
-
+        SuspectRepository repo = new SuspectRepositoryImpl(App.getAppContext());
         Suspect suspectInfo = new Suspect.Builder()
                 .id(id)
                 .name("Roller")

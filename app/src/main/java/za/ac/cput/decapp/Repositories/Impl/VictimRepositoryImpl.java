@@ -18,7 +18,7 @@ import za.ac.cput.decapp.Repositories.Interfaces.VictimRepository;
 /**
  * Created by User on 2016/05/04.
  */
-public abstract class VictimRepositoryImpl extends SQLiteOpenHelper implements VictimRepository{
+public class VictimRepositoryImpl extends SQLiteOpenHelper implements VictimRepository{
     public static final String TABLE_NAME = "Victim";
     private SQLiteDatabase db;
 
@@ -158,6 +158,20 @@ public abstract class VictimRepositoryImpl extends SQLiteOpenHelper implements V
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
 
 
+    }
+    @Override
+    public String getUserEntry(String username) {
+        Cursor cursor = db.query("User", null, " COLUMN_USERNAME=?", new String[]{username}, null, null, null);
+
+        if (cursor.getCount()<1)
+        {
+            cursor.close();
+            return "NOT EXIST";
+        }
+        cursor.moveToFirst();
+        String password = cursor.getString(cursor.getColumnIndex("PASSWORD"));
+        cursor.close();
+        return password;
     }
 }
 

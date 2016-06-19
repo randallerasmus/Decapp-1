@@ -17,7 +17,7 @@ import za.ac.cput.decapp.Repositories.Interfaces.TransferRepository;
 /**
  * Created by User on 2016/05/04.
  */
-public abstract class TransferRepositoryImpl extends SQLiteOpenHelper implements TransferRepository{
+public class TransferRepositoryImpl extends SQLiteOpenHelper implements TransferRepository{
     public static final String TABLE_NAME = "Transfer";
     private SQLiteDatabase db;
 
@@ -158,6 +158,20 @@ public abstract class TransferRepositoryImpl extends SQLiteOpenHelper implements
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
 
+    }
+    @Override
+    public String getUserEntry(String username) {
+        Cursor cursor = db.query("User", null, " COLUMN_USERNAME=?", new String[]{username}, null, null, null);
+
+        if (cursor.getCount()<1)
+        {
+            cursor.close();
+            return "NOT EXIST";
+        }
+        cursor.moveToFirst();
+        String password = cursor.getString(cursor.getColumnIndex("PASSWORD"));
+        cursor.close();
+        return password;
     }
 }
 

@@ -10,6 +10,7 @@ public class User implements Serializable
     private Long id;
     private String username;
     private String password;
+    private String passwordConfirmation;
     private String authorizationNumber;
 
 
@@ -26,26 +27,27 @@ public class User implements Serializable
         return password;
     }
 
+    public String getPasswordConfirmation() {return passwordConfirmation;}
+
     public String getAuthorizationNumber() {
         return authorizationNumber;
     }
 
     public User() {
     }
-    private User(Builder builder) {
+    public User(Builder builder) {
         id = builder.id;
         username = builder.username;
         password = builder.password;
+        passwordConfirmation = builder.passwordConfirmation;
         authorizationNumber = builder.authorizationNumber;
     }
-
-
-
     public static final class Builder {
         private Long id;
         private String username;
         private String password;
-        private String authorizationNumber;
+        private String passwordConfirmation;
+       private String authorizationNumber;
 
         public Builder() {
         }
@@ -64,6 +66,10 @@ public class User implements Serializable
             password = val;
             return this;
         }
+        public Builder passwordConfirmation(String val) {
+            passwordConfirmation = val;
+            return this;
+        }
 
         public Builder authorizationNumber(String val) {
             authorizationNumber = val;
@@ -74,6 +80,7 @@ public class User implements Serializable
             builder.id = copy.id;
             builder.username = copy.username;
             builder.password = copy.password;
+            builder.passwordConfirmation = copy.passwordConfirmation;
             builder.authorizationNumber = copy.authorizationNumber;
             return this;
         }

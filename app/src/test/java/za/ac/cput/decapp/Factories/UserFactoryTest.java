@@ -16,25 +16,28 @@ public class UserFactoryTest {
         @Test
         public void testCreateUser() throws Exception {
 
-            User User = UserFactory.getUser("The Hacker","randallerasmus1@gmail.com","******","213/06/2016");
-            Assert.assertEquals("The Hacker",User);
+            User user = UserFactory.getUser("The Hacker","******","******","213/06/2016");
+            Assert.assertEquals("The Hacker",user.getUsername());
+            Assert.assertEquals("******",user.getPassword());
+            Assert.assertEquals("******",user.getPasswordConfirmation());
+            Assert.assertEquals("213/06/2016",user.getAuthorizationNumber());
         }
         @Test
         public void testUpdate () throws Exception
         {
-            User user = UserFactory.getUser("The Hacker","randallerasmus1@gmail.com","******","213/06/2016");
+            User user = UserFactory.getUser("The Hacker","******","******","213/06/2016");
             User newUser = new User
                     .Builder()
                     .copy(user)
-                    .screenName("Olga")
-                    .email("randallerasmus1@gmail.com")
-                    .password("******")
-                    .obNumber("213/06/2016")
+                    .username("Olga")
+                     .password("******")
+                    .passwordConfirmation("******")
+                    .authorizationNumber("213/06/2016")
                     .build();
 
-            Assert.assertEquals("The Hacker",newUser.getScreenName());
-            Assert.assertEquals("randallerasmus1@gmail.com",newUser.getEmail());
+            Assert.assertEquals("Olga",newUser.getUsername());
             Assert.assertEquals("******",newUser.getPassword());
-            Assert.assertEquals("213/04/2016",newUser.getobNumber());
+            Assert.assertEquals("******",newUser.getPasswordConfirmation());
+            Assert.assertEquals("213/06/2016",newUser.getAuthorizationNumber());
         }
     }

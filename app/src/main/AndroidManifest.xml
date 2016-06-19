@@ -26,7 +26,7 @@
         <activity android:name=".LawActivity"
             android:label="WebViewApp"/>
         <!--<service android:name="za.ac.cput.decapp.services.Impl.LawServiceImpl"/>-->
-        <!--<service android:name="za.ac.cput.decapp.services.Impl.LoginServiceImpl"/>-->
+        <service android:name="za.ac.cput.decapp.services.Impl.LoginServiceImpl"/>
         <!--<service android:name="za.ac.cput.decapp.services.Impl.RegisterServiceImpl"/>-->
         <!--<service android:name="za.ac.cput.decapp.services.Impl.RemoveServiceImpl"/>-->
         <!--<service android:name="za.ac.cput.decapp.services.Impl.SearchServiceImpl"/>-->
